@@ -12,4 +12,10 @@ func main() {
 	flag.Parse()
 	m := model.ParseJSON(*jsonFile)
 	fmt.Printf("%v\n", m)
+
+	c := model.ToCausalityOutput(m)
+	println(c)
+
+	d := model.OutputProgram(m)
+	println(d)
 }

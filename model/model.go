@@ -2,7 +2,7 @@ package model
 
 // Literal represents a literal, either positive or negative
 type Literal struct {
-	Negation bool
+	Polarity bool
 	Name     string
 }
 
@@ -25,7 +25,7 @@ type InitialState struct {
 
 // Program represents the action sequence
 type Program struct {
-	ActionSequence []Action
+	ActionSequence []string
 }
 
 // DomainDescription represents actions, initial state, goal, and program

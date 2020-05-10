@@ -1,1 +1,49 @@
-{"ActionDescription":[{"Name":"FlipSwitch","Effect":{"Negation":true,"Name":"on"},"Precondition":[{"Negation":true,"Name":"off"}]},{"Name":"FlipSwitch","Effect":{"Negation":true,"Name":"off"},"Precondition":[{"Negation":true,"Name":"on"}]}],"InitialStateDescription":{"State":[{"Negation":true,"Name":"off"}]},"GoalDescription":{"Specification":[{"Negation":true,"Name":"on"}]},"ProgramDescription":{"ActionSequence":[{"Name":"FlipSwitch","Effect":{"Negation":true,"Name":"on"},"Precondition":[{"Negation":true,"Name":"off"}]}]}}
+{
+    "ActionDescription": [
+        {
+            "Name": "FlipSwitch",
+            "Effect": {
+                "Polarity": true,
+                "Name": "on"
+            },
+            "Precondition": [
+                {
+                    "Polarity": false,
+                    "Name": "on"
+                }
+            ]
+        },
+        {
+            "Name": "FlipSwitch",
+            "Effect": {
+                "Polarity": false,
+                "Name": "on"
+            },
+            "Precondition": [
+                {
+                    "Polarity": true,
+                    "Name": "on"
+                }
+            ]
+        }
+    ],
+    "InitialStateDescription": {
+        "State": [
+            {
+                "Polarity": false,
+                "Name": "on"
+            }
+        ]
+    },
+    "GoalDescription": {
+        "Specification": [
+            {
+                "Polarity": true,
+                "Name": "on"
+            }
+        ]
+    },
+    "ProgramDescription": {
+        "ActionSequence": ["FlipSwitch", "FlipSwitch"]
+    }
+}

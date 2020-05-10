@@ -20,8 +20,8 @@ func openJSON(filename string) []byte {
 	return byteValue
 }
 
-// ParseJSON parses a JSON file to a DomainDescription
-func ParseJSON(filename string) DomainDescription {
+// ParseDomainJSON parses a JSON file to a DomainDescription
+func ParseDomainJSON(filename string) DomainDescription {
 	jsonFile := openJSON(filename)
 	var dd DomainDescription
 	json.Unmarshal(jsonFile, &dd)

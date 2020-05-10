@@ -21,7 +21,7 @@ func getDomainDescription() DomainDescription {
 func TestParseJSON(t *testing.T) {
 
 	want := getDomainDescription()
-	got := ParseJSON("../ressources/flipSwitch.json")
+	got := ParseDomainJSON("../ressources/flipSwitch.json")
 
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("\nw: %v\ng: %v", want, got)
@@ -30,7 +30,7 @@ func TestParseJSON(t *testing.T) {
 
 func TestOutputProgram(t *testing.T) {
 	want := "flipswitch;flipswitch"
-	got := OutputProgram(ParseJSON("../ressources/flipSwitch.json"))
+	got := OutputProgram(ParseDomainJSON("../ressources/flipSwitch.json"))
 
 	if want != got {
 		t.Errorf("\nw: %v\ng: %v", want, got)

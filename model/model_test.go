@@ -12,7 +12,7 @@ func getDomainDescription() DomainDescription {
 	a2 := Action{Name: "FlipSwitch", Effect: off, Precondition: []Literal{on}}
 	init := InitialState{State: []Literal{off}}
 	goal := Goal{Specification: []Literal{on}}
-	program := Program{ActionSequence: []string{a1.Name, a1.Name}}
+	program := Program{ActionSequence: []string{a1.Name}}
 	want := DomainDescription{ActionDescription: []Action{a1, a2}, InitialStateDescription: init, GoalDescription: goal, ProgramDescription: program}
 	return want
 }
@@ -29,7 +29,7 @@ func TestParseJSON(t *testing.T) {
 }
 
 func TestOutputProgram(t *testing.T) {
-	want := "flipswitch;flipswitch"
+	want := "flipswitch"
 	got := OutputProgram(ParseDomainJSON("../ressources/flipSwitch.json"))
 
 	if want != got {

@@ -2,25 +2,28 @@ package model
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 )
 
-func openJSON(filename string) *os.File {
+func openJSON(filename string) []byte {
 	jsonFile, err := os.Open(filename)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
+	}
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatal(err)
 	}
 	defer jsonFile.Close()
-	return jsonFile
+	return byteValue
 }
 
 // ParseJSON parses a JSON file to a DomainDescription
 func ParseJSON(filename string) DomainDescription {
 	jsonFile := openJSON(filename)
-	byteValue, _ := ioutil.ReadAll(jsonFile)
 	var dd DomainDescription
-	json.Unmarshal(byteValue, &dd)
+	json.Unmarshal(jsonFile, &dd)
 	return dd
 }

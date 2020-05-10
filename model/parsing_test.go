@@ -17,7 +17,10 @@ func TestParseJSON(t *testing.T) {
 	program := Program{ActionSequence: []Action{a1}}
 	want := DomainDescription{ActionDescription: []Action{a1, a2}, InitialStateDescription: init, GoalDescription: goal, ProgramDescription: program}
 
-	if got := ParseJSON("../ressources/flipSwitch.json"); reflect.DeepEqual(got, want) {
-		t.Errorf("ParseJSON() = %v, want %v", got, want)
+	got := ParseJSON("../ressources/flipSwitch.json")
+	//fmt.Printf("%v\n%v\n", want, got)
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("\n%v\n%v", got, want)
 	}
 }

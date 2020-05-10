@@ -35,3 +35,8 @@ type DomainDescription struct {
 	GoalDescription         Goal
 	ProgramDescription      Program
 }
+
+// Reasons represents the reasons of an action
+type Reasons struct {
+	Reasons [][]string
+}

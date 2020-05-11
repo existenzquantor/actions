@@ -31,12 +31,23 @@ func reasonAction(action string, causalitypath *string, c string, d string) mode
 	cmd.Dir = *causalitypath
 	b, _ := cmd.CombinedOutput()
 	st := "{\n\"Reasons\": " + processPrologOutput(string(b)) + "}"
-	var rea model.Reasons
+	var rea model.ReasonsIntermediate
 	err := json.Unmarshal([]byte(st), &rea)
 	if err != nil {
 		log.Fatal(err)
 	}
-	return rea
+	var reasons []model.Reason
+	for _, r := range rea.Reasons {
+		var l model.Literal
+		if strings.HasPrefix(r[0], "not(") {
+			l = model.Literal{Polarity: false, Name: r[0][4 : len(r[0])-1]}
+		} else {
+			l = model.Literal{Polarity: true, Name: r[0]}
+		}
+		as := strings.Split(r[1], ":")
+		reasons = append(reasons, model.Reason{Reason: l, ActionSequence: as})
+	}
+	return model.Reasons{Reasons: reasons}
 }
 
 func main() {

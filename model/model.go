@@ -36,7 +36,18 @@ type DomainDescription struct {
 	ProgramDescription      Program
 }
 
-// Reasons represents the reasons of an action
-type Reasons struct {
+// ReasonsIntermediate represents the reasons of an action
+type ReasonsIntermediate struct {
 	Reasons [][]string
+}
+
+// Reason represents a reason
+type Reason struct {
+	Reason         Literal
+	ActionSequence []string
+}
+
+// Reasons represents a list of reasons
+type Reasons struct {
+	Reasons []Reason
 }

@@ -30,7 +30,7 @@ func ToCausalityOutput(domain DomainDescription) string {
 	}
 	// InitialState
 	init := ","
-	for _, a := range domain.InitialStateDescription.State {
+	for _, a := range domain.InitialStateDescription.State.State {
 		init = init + literalToString(a)
 	}
 	s = s + fmt.Sprintf("init([%s]).\n", init[1:])

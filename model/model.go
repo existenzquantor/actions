@@ -13,14 +13,63 @@ type Action struct {
 	Precondition []Literal
 }
 
+// Applicable checks if an action is applicable in a state
+func (a Action) Applicable(s State) bool {
+	for _, p := range a.Precondition {
+		if !s.containsStateLiteral(p) {
+			return false
+		}
+	}
+	return true
+}
+
 // Goal represents a goal description
 type Goal struct {
 	Specification []Literal
 }
 
+// State represents a state
+type State struct {
+	Time  int
+	State []Literal
+}
+
+func (s *State) containsStateLiteral(l Literal) bool {
+	for _, m := range s.State {
+		if m.Polarity == l.Polarity && m.Name == l.Name {
+			return true
+		}
+	}
+	return false
+}
+
+func (s *State) addLiteral(l Literal) {
+	s.State = append(s.State, l)
+}
+
+// ApplyAction applies an action to a state
+func (s *State) ApplyAction(a Action) {
+	if a.Applicable(*s) {
+		newState := State{}
+		for i := 0; i < len(s.State); i++ {
+			if s.State[i].Name == a.Effect.Name {
+				newState.addLiteral(Literal{Name: a.Effect.Name, Polarity: a.Effect.Polarity})
+			} else {
+				newState.addLiteral(s.State[i])
+			}
+		}
+		s.State = newState.State
+	}
+}
+
+// SetStateTime sets the time field of a state
+func (s *State) SetStateTime(t int) {
+	s.Time = t
+}
+
 // InitialState represents the initial state
 type InitialState struct {
-	State []Literal
+	State State
 }
 
 // Program represents the action sequence

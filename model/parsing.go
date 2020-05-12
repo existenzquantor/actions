@@ -31,6 +31,9 @@ func ParseDomainJSON(filename string) DomainDescription {
 
 // ParsePrologOutput parses the Prolog output
 func ParsePrologOutput(s string) Reasons {
+	if strings.HasPrefix(s, "[]") {
+		return Reasons{}
+	}
 	s = strings.ReplaceAll(s, "[", "")
 	s = strings.ReplaceAll(s, "]", "")
 	s = strings.ReplaceAll(s, "\n", "")

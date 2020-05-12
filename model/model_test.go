@@ -10,7 +10,7 @@ func getDomainDescription() DomainDescription {
 	off := Literal{Polarity: false, Name: "on"}
 	a1 := Action{Name: "FlipSwitch", Effect: on, Precondition: []Literal{off}}
 	a2 := Action{Name: "FlipSwitch", Effect: off, Precondition: []Literal{on}}
-	init := InitialState{State: []Literal{off}}
+	init := InitialState{State: State{State: []Literal{off}}}
 	goal := Goal{Specification: []Literal{on}}
 	program := Program{ActionSequence: []string{a1.Name}}
 	want := DomainDescription{ActionDescription: []Action{a1, a2}, InitialStateDescription: init, GoalDescription: goal, ProgramDescription: program}

@@ -7,6 +7,7 @@ import (
 	"os/exec"
 
 	"github.com/existenzquantor/actions/model"
+	"github.com/existenzquantor/actions/reasoning"
 )
 
 func reasonAction(action string, causalitypath *string, c string, d string) model.Reasons {
@@ -22,7 +23,7 @@ func reasonAction(action string, causalitypath *string, c string, d string) mode
 }
 
 func main() {
-	jsonFile := flag.String("json", "./ressources/flipSwitch.json", "JSON file that contains a domain description.")
+	jsonFile := flag.String("json", "./ressources/flipSwitch2.json", "JSON file that contains a domain description.")
 	causalitypath := flag.String("causalitypath", "../causality/", "Path to executable of causal reasoning")
 
 	flag.Parse()
@@ -31,8 +32,13 @@ func main() {
 	c := model.ToCausalityOutput(m)
 	d := model.OutputProgram(m)
 
-	for _, a := range m.ProgramDescription.ActionSequence {
+	for e, a := range m.ProgramDescription.ActionSequence {
 		o := reasonAction(a, causalitypath, c, d)
-		fmt.Printf("%v => %v\n", a, o)
+		fmt.Printf("%v: %v => %v\n", e, a, o)
+	}
+
+	for i := 0; i < len(m.ProgramDescription.ActionSequence); i++ {
+		s := reasoning.StateAt(i, m)
+		fmt.Printf("%v: %v => %v\n", i, s, m.ProgramDescription.ActionSequence[i])
 	}
 }

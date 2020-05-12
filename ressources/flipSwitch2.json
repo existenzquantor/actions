@@ -48,7 +48,7 @@
     },
     "ProgramDescription": {
         "ActionSequence": [
-            "FlipSwitch"
+            "FlipSwitch", "FlipSwitch"
         ]
     }
 }

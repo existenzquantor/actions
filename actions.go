@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"os/exec"
 
@@ -23,7 +25,7 @@ func reasonAction(action string, causalitypath *string, c string, d string) mode
 }
 
 func main() {
-	jsonFile := flag.String("json", "./ressources/flipSwitch2.json", "JSON file that contains a domain description.")
+	jsonFile := flag.String("json", "./ressources/flipSwitch.json", "JSON file that contains a domain description.")
 	causalitypath := flag.String("causalitypath", "../causality/", "Path to executable of causal reasoning")
 
 	flag.Parse()
@@ -32,13 +34,17 @@ func main() {
 	c := model.ToCausalityOutput(m)
 	d := model.OutputProgram(m)
 
-	for e, a := range m.ProgramDescription.ActionSequence {
-		o := reasonAction(a, causalitypath, c, d)
-		fmt.Printf("%v: %v => %v\n", e, a, o)
-	}
-
+	var concepts []model.ActionConcept
 	for i := 0; i < len(m.ProgramDescription.ActionSequence); i++ {
+		a := m.ProgramDescription.ActionSequence[i]
+		o := reasonAction(a, causalitypath, c, d)
 		s := reasoning.StateAt(i, m)
-		fmt.Printf("%v: %v => %v\n", i, s, m.ProgramDescription.ActionSequence[i])
+		n := model.ActionConcept{ActionName: a, Context: s, Causes: o}
+		concepts = append(concepts, n)
 	}
+	ac, err := json.Marshal(model.ActionConcepts{Concepts: concepts})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%v\n", string(ac))
 }

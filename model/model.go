@@ -87,11 +87,23 @@ type DomainDescription struct {
 
 // Reason represents a reason
 type Reason struct {
-	Reason         Literal
-	ActionSequence []string
+	Reason  Literal
+	Witness []string
 }
 
 // Reasons represents a list of reasons
 type Reasons struct {
 	Reasons []Reason
+}
+
+// ActionConcept describes an action conceptually
+type ActionConcept struct {
+	ActionName string
+	Context    State
+	Causes     Reasons
+}
+
+//ActionConcepts represents the conceptual descriptions of each action in a sequence
+type ActionConcepts struct {
+	Concepts []ActionConcept
 }

@@ -50,7 +50,7 @@ func ParsePrologOutput(s string) Reasons {
 		} else {
 			lit = Literal{Polarity: true, Name: la[0][0 : len(la[0])-1]}
 		}
-		rea = append(rea, Reason{Reason: lit, ActionSequence: strings.Split(la[1], ":")})
+		rea = append(rea, Reason{Reason: lit, Witness: strings.Split(la[1], ":")})
 	}
 	return Reasons{Reasons: rea}
 }

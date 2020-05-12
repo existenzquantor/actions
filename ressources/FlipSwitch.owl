@@ -1,43 +1,32 @@
-Prefix: owl: <http://www.w3.org/2002/07/owl#>
-Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-Prefix: xml: <http://www.w3.org/XML/1998/namespace>
-Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix(:=<https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#>)
+Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
+Ontology(<https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl>
 
-Ontology: <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl>
+Declaration(Class(:FlipSwitch))
+Declaration(Class(:TurnOff))
+Declaration(Class(:TurnOn))
+Declaration(Class(:on))
+Declaration(ObjectProperty(:causes))
+Declaration(ObjectProperty(:context))
+
+############################
+#   Classes
+############################
+
+# Class: :TurnOff (:TurnOff)
+
+EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context :on)))
+
+# Class: :TurnOn (:TurnOn)
+
+EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context ObjectComplementOf(:on))))
 
 
-ObjectProperty: <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#causes>
-
-    
-ObjectProperty: <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#context>
-
-    SubPropertyOf: 
-        owl:topObjectProperty
-    
-    
-ObjectProperty: owl:topObjectProperty
-
-    
-Class: <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#FlipSwitch>
-
-    
-Class: <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#TurnOff>
-
-    EquivalentTo: 
-        <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#FlipSwitch>
-         and (<https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#context> some <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#on>)
-    
-    
-Class: <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#TurnOn>
-
-    EquivalentTo: 
-        <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#FlipSwitch>
-         and (<https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#context> some (not (<https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#on>)))
-    
-    
-Class: <https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#on>
-
-    
+)

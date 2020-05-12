@@ -16,17 +16,10 @@ Declaration(Class(:on))
 Declaration(ObjectProperty(:causes))
 Declaration(ObjectProperty(:context))
 
-############################
-#   Classes
-############################
-
-# Class: :TurnOff (:TurnOff)
 
 EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context :on)))
 
-# Class: :TurnOn (:TurnOn)
 
 EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context ObjectComplementOf(:on))))
-
 
 )

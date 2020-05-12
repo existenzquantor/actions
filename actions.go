@@ -57,9 +57,9 @@ func main() {
 		}
 		fmt.Printf("%v\n", string(ac))
 	case "types":
-		fmt.Printf("TODO:\nWrite new temp.owl that imports %v\n", ontology)
+		fmt.Printf("TODO:\nWrite new temp.owl that imports %v\n", *ontology)
 		fmt.Printf("Add new concepts built from %v\n", actionConcepts(m, c, d, causalitypath))
-		fmt.Printf("Invoke: %vjava -jar HermiT.jar -c temp.owl\n", hermitpath)
+		fmt.Printf("Invoke: %vjava -jar HermiT.jar -c temp.owl\n", *hermitpath)
 		fmt.Printf("Finally parse hermit's output and extract types\n")
 	}
 }

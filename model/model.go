@@ -1,5 +1,7 @@
 package model
 
+import "strconv"
+
 // Literal represents a literal, either positive or negative
 type Literal struct {
 	Polarity bool
@@ -101,6 +103,50 @@ type ActionConcept struct {
 	ActionName string
 	Context    State
 	Causes     Reasons
+}
+
+// ToOWLString outputs the action concept as a string in OWL functional syntax
+func (c ActionConcept) ToOWLString(planstep int) string {
+	s := "EquivalentClasses(:C" + strconv.Itoa(planstep)
+	var contextStrings []string
+	for _, l := range c.Context.State {
+		if l.Polarity == false {
+			contextStrings = append(contextStrings, "ObjectComplementOf(:"+l.Name+")")
+		} else {
+			contextStrings = append(contextStrings, ":"+l.Name)
+		}
+	}
+	sContext := "ObjectSomeValuesFrom(:context "
+	sContextLits := ""
+	for _, i := range contextStrings {
+		sContextLits = sContextLits + " " + i
+	}
+	if len(contextStrings) > 1 {
+		sContextLits = "ObjectIntersectionOf(" + sContextLits + ")"
+	}
+	sContext = sContext + sContextLits + ")"
+
+	var reasonStrings []string
+	for _, l := range c.Causes.Reasons {
+		if l.Reason.Polarity == false {
+			reasonStrings = append(reasonStrings, "ObjectComplementOf(:"+l.Reason.Name+")")
+		} else {
+			reasonStrings = append(reasonStrings, ":"+l.Reason.Name)
+		}
+	}
+	sReasons := "ObjectSomeValuesFrom(:causes "
+	sReasonLits := ""
+	for _, i := range reasonStrings {
+		sReasonLits = sReasonLits + " " + i
+	}
+
+	if len(reasonStrings) > 1 {
+		sReasonLits = "ObjectIntersectionOf(" + sReasonLits + ")"
+	}
+	sReasons = sReasons + sReasonLits + ")"
+
+	s = s + " ObjectIntersectionOf(:" + c.ActionName + " " + sContext + " " + sReasons + "))"
+	return s
 }
 
 //ActionConcepts represents the conceptual descriptions of each action in a sequence

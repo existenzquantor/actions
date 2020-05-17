@@ -1,0 +1,25 @@
+Prefix(:=<https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl#>)
+Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<https://github.com/existenzquantor/actions/ressources/FlipSwitch.owl>
+
+Declaration(Class(:FlipSwitch))
+Declaration(Class(:TurnOff))
+Declaration(Class(:TurnOn))
+Declaration(Class(:on))
+Declaration(ObjectProperty(:causes))
+Declaration(ObjectProperty(:context))
+
+
+EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context :on)))
+
+
+EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context ObjectComplementOf(:on))))
+EquivalentClasses(:C0 ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context  ObjectComplementOf(:on)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :on :on))))
+)

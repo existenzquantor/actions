@@ -21,5 +21,5 @@ EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom
 
 
 EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context ObjectComplementOf(:on))))
-EquivalentClasses(:Action0 ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context  ObjectComplementOf(:on)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :on :on))))
+EquivalentClasses(:Action1 ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context  :on) ObjectSomeValuesFrom(:causes  ObjectComplementOf(:on))))
 )

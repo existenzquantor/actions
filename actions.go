@@ -23,7 +23,7 @@ func reasonForAction(action string, causalitypath *string, c string, d string) m
 	defer f.Close()
 	defer os.Remove(tmpFile)
 	f.WriteString(c)
-	cmd := exec.Command("./causality", "temp.pl", string(d), action, "reason_temporal_empty")
+	cmd := exec.Command("./causality", "temp.pl", string(d), strings.ToLower(action), "reason_temporal_empty_nogoal")
 	cmd.Dir = *causalitypath
 	b, _ := cmd.CombinedOutput()
 	return model.ParsePrologOutput(string(b))
@@ -57,10 +57,10 @@ func bfs(subs [][]string, path []string, goal string) bool {
 	if len(path) < len(subs) {
 		for _, s := range subs {
 			if s[0] == path[len(path)-1] && !contains(path, s[1]) {
-				path_new := make([]string, len(path))
-				copy(path_new, path)
-				path_new = append(path_new, s[1])
-				if bfs(subs, path_new, goal) {
+				pathNew := make([]string, len(path))
+				copy(pathNew, path)
+				pathNew = append(pathNew, s[1])
+				if bfs(subs, pathNew, goal) {
 					return true
 				}
 			}
@@ -127,16 +127,16 @@ func getDescriptions(subs [][]string, action string) []string {
 	return descriptions
 }
 
-func UrlToLines(url string) ([]string, error) {
+func urlToLines(url string) ([]string, error) {
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	return LinesFromReader(resp.Body)
+	return linesFromReader(resp.Body)
 }
 
-func LinesFromReader(r io.Reader) ([]string, error) {
+func linesFromReader(r io.Reader) ([]string, error) {
 	var lines []string
 	scanner := bufio.NewScanner(r)
 	for scanner.Scan() {
@@ -149,8 +149,18 @@ func LinesFromReader(r io.Reader) ([]string, error) {
 	return lines, nil
 }
 
+func removeString(t []string, e string) []string {
+	var tNew []string
+	for _, x := range t {
+		if x != e {
+			tNew = append(tNew, x)
+		}
+	}
+	return tNew
+}
+
 func main() {
-	jsonFile := flag.String("domain", "./ressources/flipSwitch.json", "JSON file that contains a domain description.")
+	jsonFile := flag.String("domain", "./ressources/flipSwitch2.json", "JSON file that contains a domain description.")
 	causalitypath := flag.String("causalitypath", "../causality/", "Path to the executable of causal reasoning, see https://github.com/existenzquantor/causality")
 	ontology := flag.String("ontology", "https://raw.githubusercontent.com/existenzquantor/actions/master/ressources/FlipSwitch.owl", "IRI of the Ontology to use")
 	outputformat := flag.String("outputformat", "types", "types | concepts")
@@ -171,15 +181,16 @@ func main() {
 		fmt.Printf("%v\n", string(ac))
 	case "types":
 		ac := actionConcepts(m, c, d, causalitypath)
-		lines, err := UrlToLines(*ontology)
+		lines, err := urlToLines(*ontology)
 		if err != nil {
 			log.Fatal(err)
 		}
 		var owlStrings []string
 		for i := 0; i < len(ac.Concepts); i++ {
-			owlStrings = append(owlStrings, ac.Concepts[i].ToOWLString(i))
+			owlStrings = append(owlStrings, ac.Concepts[i].ToOWLString(i, m.ProgramDescription.ActionSequence))
 		}
 
+		var ad []model.ActionDescription
 		for i, owl := range owlStrings {
 			f, err := os.Create(*hermitpath + "/temp.owl")
 			if err != nil {
@@ -192,7 +203,14 @@ func main() {
 			f.Close()
 			s := callHermiT(*hermitpath)
 			t := getDescriptions(s, "Action"+strconv.Itoa(i))
-			fmt.Printf("%v can be described as: %v\n", "Action"+strconv.Itoa(i), t)
+			t = removeString(t, "Action"+strconv.Itoa(i))
+			ad = append(ad, model.ActionDescription{Step: i, Descriptions: t})
 		}
+		ads := model.ActionDescriptions{Plan: m.ProgramDescription.ActionSequence, Descriptions: ad}
+		result, err := json.Marshal(ads)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("%v\n", string(result))
 	}
 }

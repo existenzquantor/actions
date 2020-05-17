@@ -47,7 +47,7 @@ func ToCausalityOutput(domain DomainDescription) string {
 func OutputProgram(domain DomainDescription) string {
 	var s string
 	for _, a := range domain.ProgramDescription.ActionSequence {
-		s = s + ";" + strings.ToLower(a)
+		s = s + ":" + strings.ToLower(a)
 	}
 	return s[1:]
 }

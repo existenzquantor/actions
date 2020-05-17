@@ -1,6 +1,9 @@
 package model
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 // Literal represents a literal, either positive or negative
 type Literal struct {
@@ -106,7 +109,7 @@ type ActionConcept struct {
 }
 
 // ToOWLString outputs the action concept as a string in OWL functional syntax
-func (c ActionConcept) ToOWLString(planstep int) string {
+func (c ActionConcept) ToOWLString(planstep int, plan []string) string {
 	s := "EquivalentClasses(:Action" + strconv.Itoa(planstep)
 	var contextStrings []string
 	for _, l := range c.Context.State {
@@ -128,10 +131,12 @@ func (c ActionConcept) ToOWLString(planstep int) string {
 
 	var reasonStrings []string
 	for _, l := range c.Causes.Reasons {
-		if l.Reason.Polarity == false {
-			reasonStrings = append(reasonStrings, "ObjectComplementOf(:"+l.Reason.Name+")")
-		} else {
-			reasonStrings = append(reasonStrings, ":"+l.Reason.Name)
+		if l.Witness[planstep] != strings.ToLower(plan[planstep]) {
+			if l.Reason.Polarity == false {
+				reasonStrings = append(reasonStrings, "ObjectComplementOf(:"+l.Reason.Name+")")
+			} else {
+				reasonStrings = append(reasonStrings, ":"+l.Reason.Name)
+			}
 		}
 	}
 	sReasons := "ObjectSomeValuesFrom(:causes "
@@ -156,4 +161,16 @@ func (c ActionConcept) ToOWLString(planstep int) string {
 //ActionConcepts represents the conceptual descriptions of each action in a sequence
 type ActionConcepts struct {
 	Concepts []ActionConcept
+}
+
+// ActionDescription represents the set of descriptions under which an action falls
+type ActionDescription struct {
+	Step         int
+	Descriptions []string
+}
+
+// ActionDescriptions represent a set of ActionDescription structs
+type ActionDescriptions struct {
+	Plan         []string
+	Descriptions []ActionDescription
 }

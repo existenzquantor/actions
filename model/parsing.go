@@ -42,10 +42,10 @@ func ParsePrologOutput(s string) Reasons {
 	var lit Literal
 	var rea []Reason
 	for _, l := range sa {
-		l = strings.ReplaceAll(l, "(", "")
-		l = strings.ReplaceAll(l, ")", "")
 		la = strings.Split(l, ",")
-		if strings.HasPrefix(la[0], "not(") {
+		if strings.HasPrefix(la[0], "(not(") {
+			lit = Literal{Polarity: false, Name: la[0][5 : len(la[0])-1]}
+		} else if strings.HasPrefix(la[0], "not(") {
 			lit = Literal{Polarity: false, Name: la[0][4 : len(la[0])-1]}
 		} else {
 			lit = Literal{Polarity: true, Name: la[0]}

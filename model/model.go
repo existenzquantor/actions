@@ -107,7 +107,7 @@ type ActionConcept struct {
 
 // ToOWLString outputs the action concept as a string in OWL functional syntax
 func (c ActionConcept) ToOWLString(planstep int) string {
-	s := "EquivalentClasses(:C" + strconv.Itoa(planstep)
+	s := "EquivalentClasses(:Action" + strconv.Itoa(planstep)
 	var contextStrings []string
 	for _, l := range c.Context.State {
 		if l.Polarity == false {
@@ -138,6 +138,10 @@ func (c ActionConcept) ToOWLString(planstep int) string {
 	sReasonLits := ""
 	for _, i := range reasonStrings {
 		sReasonLits = sReasonLits + " " + i
+	}
+
+	if sReasonLits == "" {
+		sReasonLits = " owl:Thing"
 	}
 
 	if len(reasonStrings) > 1 {

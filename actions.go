@@ -171,13 +171,10 @@ func main() {
 		fmt.Printf("%v\n", string(ac))
 	case "types":
 		ac := actionConcepts(m, c, d, causalitypath)
-		fmt.Printf("TODO:\nWrite new temp.owl that imports %v\n", *ontology)
 		lines, err := UrlToLines(*ontology)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("Content: %v\n", lines)
-		fmt.Printf("Add new concepts built from %v\n", ac)
 		var owlStrings []string
 		for i := 0; i < len(ac.Concepts); i++ {
 			owlStrings = append(owlStrings, ac.Concepts[i].ToOWLString(i))
@@ -193,12 +190,9 @@ func main() {
 				f.WriteString(l + "\n")
 			}
 			f.Close()
-
-			fmt.Printf("Invoke: %vjava -jar HermiT.jar -c temp.owl\n", *hermitpath)
 			s := callHermiT(*hermitpath)
-			fmt.Printf("Subs: %v\n", s)
-			t := getDescriptions(s, "C"+strconv.Itoa(i))
-			fmt.Printf("%v can be described as: %v\n", "C"+strconv.Itoa(i), t)
+			t := getDescriptions(s, "Action"+strconv.Itoa(i))
+			fmt.Printf("%v can be described as: %v\n", "Action"+strconv.Itoa(i), t)
 		}
 	}
 }

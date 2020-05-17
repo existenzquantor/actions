@@ -160,7 +160,7 @@ func removeString(t []string, e string) []string {
 }
 
 func main() {
-	jsonFile := flag.String("domain", "./ressources/flipSwitch2.json", "JSON file that contains a domain description.")
+	jsonFile := flag.String("domain", "./ressources/flipSwitch.json", "JSON file that contains a domain description.")
 	causalitypath := flag.String("causalitypath", "../causality/", "Path to the executable of causal reasoning, see https://github.com/existenzquantor/causality")
 	ontology := flag.String("ontology", "https://raw.githubusercontent.com/existenzquantor/actions/master/ressources/FlipSwitch.owl", "IRI of the Ontology to use")
 	outputformat := flag.String("outputformat", "types", "types | concepts")
@@ -193,6 +193,8 @@ func main() {
 		var ad []model.ActionDescription
 		for i, owl := range owlStrings {
 			f, err := os.Create(*hermitpath + "/temp.owl")
+			defer f.Close()
+			defer os.Remove(*hermitpath + "/temp.owl")
 			if err != nil {
 				log.Fatal(err)
 			}

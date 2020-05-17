@@ -48,7 +48,9 @@ func ParsePrologOutput(s string) Reasons {
 		} else if strings.HasPrefix(la[0], "not(") {
 			lit = Literal{Polarity: false, Name: la[0][4 : len(la[0])-1]}
 		} else {
-			lit = Literal{Polarity: true, Name: la[0]}
+			laNo := strings.ReplaceAll(la[0], ")", "")
+			laNo = strings.ReplaceAll(la[0], "(", "")
+			lit = Literal{Polarity: true, Name: laNo}
 		}
 		rea = append(rea, Reason{Reason: lit, Witness: strings.Split(la[1], ":")})
 	}

@@ -1,9 +1,12 @@
 package model
 
 import (
+	"bufio"
 	"encoding/json"
+	"io"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"strings"
 )
@@ -55,4 +58,35 @@ func ParsePrologOutput(s string) Reasons {
 		rea = append(rea, Reason{Reason: lit, Witness: strings.Split(la[1], ":")})
 	}
 	return Reasons{Reasons: rea}
+}
+
+func urlToLines(url string) ([]string, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	return linesFromReader(resp.Body)
+}
+
+func linesFromReader(r io.Reader) ([]string, error) {
+	var lines []string
+	scanner := bufio.NewScanner(r)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+
+	return lines, nil
+}
+
+//ReadOntology retreives the ontology from url and returns an array of OWL strings
+func ReadOntology(url string) []string {
+	lines, err := urlToLines(url)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return lines
 }

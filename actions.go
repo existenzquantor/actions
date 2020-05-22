@@ -1,13 +1,10 @@
 package main
 
 import (
-	"bufio"
 	"encoding/json"
 	"flag"
 	"fmt"
-	"io"
 	"log"
-	"net/http"
 	"os"
 	"os/exec"
 	"strconv"
@@ -41,28 +38,6 @@ func actionConcepts(m model.DomainDescription, c string, d string, causalitypath
 	return model.ActionConcepts{Concepts: concepts}
 }
 
-func urlToLines(url string) ([]string, error) {
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	return linesFromReader(resp.Body)
-}
-
-func linesFromReader(r io.Reader) ([]string, error) {
-	var lines []string
-	scanner := bufio.NewScanner(r)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return lines, nil
-}
-
 func main() {
 	jsonFile := flag.String("domain", "./ressources/flipSwitch2.json", "JSON file that contains a domain description.")
 	causalitypath := flag.String("causalitypath", "../causality/", "Path to the executable of causal reasoning, see https://github.com/existenzquantor/causality")
@@ -85,14 +60,12 @@ func main() {
 		fmt.Printf("%v\n", string(ac))
 	case "types":
 		ac := actionConcepts(m, c, d, causalitypath)
-		lines, err := urlToLines(*ontology)
-		if err != nil {
-			log.Fatal(err)
-		}
 		var owlStrings []string
 		for i := 0; i < len(ac.Concepts); i++ {
 			owlStrings = append(owlStrings, ac.Concepts[i].ToOWLString(i, m.ProgramDescription.ActionSequence))
 		}
+
+		lines := model.ReadOntology(*ontology)
 
 		var ad []model.ActionDescription
 		for i, owl := range owlStrings {

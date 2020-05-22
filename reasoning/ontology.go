@@ -2,8 +2,12 @@ package reasoning
 
 import (
 	"log"
+	"os"
 	"os/exec"
+	"strconv"
 	"strings"
+
+	"github.com/existenzquantor/actions/model"
 )
 
 func removeString(t []string, e string) []string {
@@ -34,6 +38,19 @@ func callHermiT(p string, action string) []string {
 }
 
 //GetAllSubsumers calls a reasoner at a particular path to ask for all subsumbers of a given concept
-func GetAllSubsumers(path string, concept string) []string {
+func getAllSubsumers(path string, concept string) []string {
 	return callHermiT(path, concept)
+}
+
+//ActionDescriptionsFromActionConcepts uses the ontology to infer descriptions (action types) from conceptual action descriptions
+func ActionDescriptionsFromActionConcepts(pathOntology string, pathReasoner string, ac model.ActionConcepts, plan []string) model.ActionDescriptions {
+	lines := model.ReadOntology(pathOntology)
+	var ad []model.ActionDescription
+	for i, owl := range ac.ToOWLString(plan) {
+		model.AddToOntology(pathReasoner, lines, owl)
+		t := getAllSubsumers(pathReasoner, "Action"+strconv.Itoa(i))
+		os.Remove(pathReasoner + "/temp.owl")
+		ad = append(ad, model.ActionDescription{Step: i, Descriptions: t})
+	}
+	return model.ActionDescriptions{Plan: plan, Descriptions: ad}
 }

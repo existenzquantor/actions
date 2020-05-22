@@ -1,7 +1,10 @@
 package model
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
+	"os"
 	"strings"
 )
 
@@ -50,4 +53,26 @@ func OutputProgram(domain DomainDescription) string {
 		s = s + ":" + strings.ToLower(a)
 	}
 	return s[1:]
+}
+
+//ToJSON returns a struct as JSON
+func ToJSON(astruct interface{}) string {
+	ac, err := json.Marshal(astruct)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(ac)
+}
+
+//AddToOntology adds line to ontology in a temp file located at path
+func AddToOntology(path string, ontology []string, line string) {
+	f, err := os.Create(path + "/temp.owl")
+	if err != nil {
+		log.Fatal(err)
+	}
+	ontology[len(ontology)-2] = line
+	for _, l := range ontology {
+		f.WriteString(l + "\n")
+	}
+	f.Close()
 }

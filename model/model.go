@@ -163,6 +163,15 @@ type ActionConcepts struct {
 	Concepts []ActionConcept
 }
 
+//ToOWLString returns an array of OWL string representations of the action concepts
+func (ac ActionConcepts) ToOWLString(plan []string) []string {
+	var owlStrings []string
+	for i := 0; i < len(ac.Concepts); i++ {
+		owlStrings = append(owlStrings, ac.Concepts[i].ToOWLString(i, plan))
+	}
+	return owlStrings
+}
+
 // ActionDescription represents the set of descriptions under which an action falls
 type ActionDescription struct {
 	Step         int

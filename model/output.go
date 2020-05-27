@@ -76,3 +76,15 @@ func AddToOntology(path string, ontology []string, line string) {
 	}
 	f.Close()
 }
+
+//WriteOntology writes the ontology to temp.owl
+func WriteOntology(path string, ontology []string) {
+	f, err := os.Create(path + "/temp.owl")
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, l := range ontology {
+		f.WriteString(l + "\n")
+	}
+	f.Close()
+}

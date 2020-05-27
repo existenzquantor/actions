@@ -17,7 +17,7 @@ func getDomainDescription() DomainDescription {
 	return want
 }
 
-// TestParseJSON tests ParseJSON
+//TestParseJSON tests ParseJSON
 func TestParseJSON(t *testing.T) {
 
 	want := getDomainDescription()
@@ -28,6 +28,7 @@ func TestParseJSON(t *testing.T) {
 	}
 }
 
+//TestOutputProgram tests if the program is correctly extracted from the json file
 func TestOutputProgram(t *testing.T) {
 	want := "flipswitch"
 	got := OutputProgram(ParseDomainJSON("../ressources/flipSwitch.json"))

@@ -37,7 +37,6 @@ func callHermiT(p string, action string) []string {
 	return s2[1 : len(s2)-1]
 }
 
-//GetAllSubsumers calls a reasoner at a particular path to ask for all subsumbers of a given concept
 func getAllSubsumers(path string, concept string) []string {
 	return callHermiT(path, concept)
 }
@@ -45,12 +44,17 @@ func getAllSubsumers(path string, concept string) []string {
 //ActionDescriptionsFromActionConcepts uses the ontology to infer descriptions (action types) from conceptual action descriptions
 func ActionDescriptionsFromActionConcepts(pathOntology string, pathReasoner string, ac model.ActionConcepts, plan []string) model.ActionDescriptions {
 	lines := model.ReadOntology(pathOntology)
+	lines = lines[0 : len(lines)-1]
+	for _, owl := range ac.ToOWLString(plan) {
+		lines = append(lines, owl)
+	}
+	lines = append(lines, ")")
+	model.WriteOntology(pathReasoner, lines)
 	var ad []model.ActionDescription
-	for i, owl := range ac.ToOWLString(plan) {
-		model.AddToOntology(pathReasoner, lines, owl)
+	for i := range ac.ToOWLString(plan) {
 		t := getAllSubsumers(pathReasoner, "Action"+strconv.Itoa(i))
-		os.Remove(pathReasoner + "/temp.owl")
 		ad = append(ad, model.ActionDescription{Step: i, Descriptions: t})
 	}
+	os.Remove(pathReasoner + "/temp.owl")
 	return model.ActionDescriptions{Plan: plan, Descriptions: ad}
 }

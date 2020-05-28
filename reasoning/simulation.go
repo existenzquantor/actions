@@ -31,3 +31,18 @@ func simulateSteps(t int, domain model.DomainDescription) model.State {
 func StateAt(t int, domain model.DomainDescription) model.State {
 	return simulateSteps(t, domain)
 }
+
+//UsedFacts returns the set of literals that where used by the t-th action
+func UsedFacts(t int, domain model.DomainDescription) []model.Literal {
+	var facts []model.Literal
+	s := StateAt(t, domain)
+	act := domain.ProgramDescription.ActionSequence[t]
+	for _, a := range domain.ActionDescription {
+		if a.Name == act {
+			if a.Applicable(s) {
+				facts = append(facts, a.Precondition...)
+			}
+		}
+	}
+	return facts
+}

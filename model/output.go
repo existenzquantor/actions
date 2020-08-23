@@ -11,9 +11,8 @@ import (
 func literalToString(l Literal) string {
 	if l.Polarity {
 		return fmt.Sprintf("%s", strings.ToLower(l.Name))
-	} else {
-		return fmt.Sprintf("not(%s)", strings.ToLower(l.Name))
 	}
+	return fmt.Sprintf("not(%s)", strings.ToLower(l.Name))
 }
 
 // ToCausalityOutput builds a Prolog representation for the causality program
@@ -32,15 +31,15 @@ func ToCausalityOutput(domain DomainDescription) string {
 		s = s + fmt.Sprintf("effect(%s, %s, %s).\n", strings.ToLower(a.Name), prec, eff)
 	}
 	// InitialState
-	init := ","
+	init := ""
 	for _, a := range domain.InitialStateDescription.State.State {
-		init = init + literalToString(a)
+		init = init + "," + literalToString(a)
 	}
 	s = s + fmt.Sprintf("init([%s]).\n", init[1:])
 	// Goal
-	goal := ","
+	goal := ""
 	for _, a := range domain.GoalDescription.Specification {
-		goal = goal + literalToString(a)
+		goal = goal + "," + literalToString(a)
 	}
 	s = s + fmt.Sprintf("goal([%s]).", goal[1:])
 	return s

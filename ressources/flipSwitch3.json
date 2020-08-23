@@ -1,0 +1,62 @@
+{
+    "ActionDescription": [
+        {
+            "Name": "FlipSwitch",
+            "Effect": {
+                "Polarity": true,
+                "Name": "on1"
+            },
+            "Precondition": [
+                {
+                    "Polarity": false,
+                    "Name": "on1"
+                }
+            ]
+        },
+        {
+            "Name": "FlipSwitch",
+            "Effect": {
+                "Polarity": true,
+                "Name": "on2"
+            },
+            "Precondition": [
+                {
+                    "Polarity": true,
+                    "Name": "on1"
+                }
+            ]
+        }
+    ],
+    "InitialStateDescription": {
+        "State": {
+            "Time": 0,
+            "State": [
+                {
+                    "Polarity": false,
+                    "Name": "on1"
+                },
+                {
+                    "Polarity": false,
+                    "Name": "on2"
+                }
+            ]
+        }
+    },
+    "GoalDescription": {
+        "Specification": [
+            {
+                "Polarity": true,
+                "Name": "on1"
+            },
+            {
+                "Polarity": true,
+                "Name": "on2"
+            }
+        ]
+    },
+    "ProgramDescription": {
+        "ActionSequence": [
+            "FlipSwitch", "FlipSwitch"
+        ]
+    }
+}

@@ -20,12 +20,38 @@ func reasonForAction(action string, causalitypath *string, causeProlog string, p
 	return model.ParsePrologOutput(string(b))
 }
 
+func plansEqualButNotAtStepI(i int, plan1 []string, plan2 []string) bool {
+	if len(plan1) != len(plan2) {
+		return false
+	}
+	for j := 0; j < len(plan1); j++ {
+		if i != j && plan1[j] != plan2[j] {
+			return false
+		}
+	}
+	return true
+}
+
+func keepOnlyReasonsForThisActionToken(reasons model.Reasons, i int, plan string) model.Reasons {
+	p := strings.Split(plan, ":")
+	var reasons2 []model.Reason
+	for _, r := range reasons.Reasons {
+		if r.Witness[i] != p[i] {
+			if plansEqualButNotAtStepI(i, r.Witness, p) {
+				reasons2 = append(reasons2, r)
+			}
+		}
+	}
+	return model.Reasons{Reasons: reasons2}
+}
+
 //ActionConcepts returns the action concepts associated with the actions in the plan
 func ActionConcepts(m model.DomainDescription, causeProlog string, plan string, causalitypath *string) model.ActionConcepts {
 	var concepts []model.ActionConcept
 	for i := 0; i < len(m.ProgramDescription.ActionSequence); i++ {
 		a := m.ProgramDescription.ActionSequence[i]
 		o := reasonForAction(a, causalitypath, causeProlog, plan)
+		o = keepOnlyReasonsForThisActionToken(o, i, plan)
 		s := StateAt(i, m)
 		n := model.ActionConcept{ActionName: a, Context: s, Causes: o}
 		concepts = append(concepts, n)

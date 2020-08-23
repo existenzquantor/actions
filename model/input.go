@@ -3,7 +3,6 @@ package model
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -35,7 +34,6 @@ func ParseDomainJSON(filename string) DomainDescription {
 
 // ParsePrologOutput parses the Prolog output
 func ParsePrologOutput(s string) Reasons {
-	fmt.Print(s)
 	if strings.HasPrefix(s, "[]") {
 		return Reasons{}
 	}

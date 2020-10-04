@@ -94,6 +94,12 @@ type DomainDescription struct {
 type Reason struct {
 	Reason  Literal
 	Witness []string
+	IsGoal  bool
+}
+
+// SetIsGoal sets goal attribute
+func (r *Reason) SetIsGoal(b bool) {
+	r.IsGoal = b
 }
 
 // Reasons represents a list of reasons
@@ -154,7 +160,37 @@ func (c ActionConcept) ToOWLString(planstep int, plan []string) string {
 	}
 	sReasons = sReasons + sReasonLits + ")"
 
-	s = s + " ObjectIntersectionOf(:" + c.ActionName + " " + sContext + " " + sReasons + "))"
+	//
+
+	var reasonStrings2 []string
+	for _, l := range c.Causes.Reasons {
+		if l.IsGoal {
+			if l.Witness[planstep] != strings.ToLower(plan[planstep]) {
+				if l.Reason.Polarity == false {
+					reasonStrings2 = append(reasonStrings2, "ObjectComplementOf(:"+l.Reason.Name+")")
+				} else {
+					reasonStrings2 = append(reasonStrings2, ":"+l.Reason.Name)
+				}
+			}
+		}
+	}
+	sReasons2 := "ObjectSomeValuesFrom(:hasReason "
+	sReasonLits2 := ""
+	for _, i := range reasonStrings2 {
+		sReasonLits2 = sReasonLits2 + " " + i
+	}
+
+	if sReasonLits2 == "" {
+		sReasonLits2 = " owl:Thing"
+	}
+
+	if len(reasonStrings2) > 1 {
+		sReasonLits2 = "ObjectIntersectionOf(" + sReasonLits2 + ")"
+	}
+	sReasons2 = sReasons2 + sReasonLits2 + ")"
+
+	s = s + " ObjectIntersectionOf(:" + c.ActionName + " " + sContext + " " + sReasons + " " + sReasons2 + "))"
+
 	return s
 }
 

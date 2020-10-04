@@ -45,12 +45,23 @@ func keepOnlyReasonsForThisActionToken(reasons model.Reasons, i int, plan string
 	return model.Reasons{Reasons: reasons2}
 }
 
+func markReasons(goals []model.Literal, reasons model.Reasons) {
+	for i := range reasons.Reasons {
+		for _, l := range goals {
+			if reasons.Reasons[i].Reason.Polarity == l.Polarity && reasons.Reasons[i].Reason.Name == l.Name {
+				reasons.Reasons[i].SetIsGoal(true)
+			}
+		}
+	}
+}
+
 //ActionConcepts returns the action concepts associated with the actions in the plan
 func ActionConcepts(m model.DomainDescription, causeProlog string, plan string, causalitypath *string) model.ActionConcepts {
 	var concepts []model.ActionConcept
 	for i := 0; i < len(m.ProgramDescription.ActionSequence); i++ {
 		a := m.ProgramDescription.ActionSequence[i]
 		o := reasonForAction(a, causalitypath, causeProlog, plan)
+		markReasons(m.GoalDescription.Specification, o)
 		o = keepOnlyReasonsForThisActionToken(o, i, plan)
 		s := StateAt(i, m)
 		n := model.ActionConcept{ActionName: a, Context: s, Causes: o}

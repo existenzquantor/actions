@@ -43,8 +43,13 @@ func getAllSubsumers(path string, concept string) []string {
 
 //ActionDescriptionsFromActionConcepts uses the ontology to infer descriptions (action types) from conceptual action descriptions
 func ActionDescriptionsFromActionConcepts(pathOntology string, pathReasoner string, ac model.ActionConcepts, plan []string) model.ActionDescriptions {
-	lines := model.ReadOntology(pathOntology)
-	lines = lines[0 : len(lines)-1]
+	s := strings.Split(pathOntology, "/")
+	oName := s[len(s)-1]
+	oName = oName[0 : len(oName)-4]
+	var lines []string
+	lines = append(lines, "Prefix(:=<"+oName+"#>)")
+	lines = append(lines, "Ontology(<TempActions>")
+	lines = append(lines, "Import(<file://"+pathOntology+">)")
 	for _, owl := range ac.ToOWLString(plan) {
 		lines = append(lines, owl)
 	}

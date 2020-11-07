@@ -1,6 +1,6 @@
-Prefix(:=<FlipSwitchOntology#>)
+Prefix(:=<FlipSwitch#>)
 
-Ontology(<FlipSwitchOntology>
+Ontology(<FlipSwitchy>
 
 Declaration(Class(:FlipSwitch))
 Declaration(Class(:TurnOff))

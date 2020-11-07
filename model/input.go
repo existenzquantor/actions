@@ -58,12 +58,3 @@ func ParsePrologOutput(s string) Reasons {
 	}
 	return Reasons{Reasons: rea}
 }
-
-//ReadOntology retreives the ontology from a file and returns an array of OWL strings
-func ReadOntology(f string) []string {
-	lines, err := ioutil.ReadFile(f) // urlToLines(url)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return strings.Split(string(lines), "\n")
-}

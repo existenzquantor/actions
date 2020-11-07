@@ -58,10 +58,10 @@ func markReasons(goals []model.Literal, reasons model.Reasons) {
 //ActionConcepts returns the action concepts associated with the actions in the plan
 func ActionConcepts(m model.DomainDescription, causeProlog string, plan string, causalitypath *string) model.ActionConcepts {
 	var concepts []model.ActionConcept
-	for i := 0; i < len(m.ProgramDescription.ActionSequence); i++ {
-		a := m.ProgramDescription.ActionSequence[i]
+	for i := 0; i < len(m.ProgramDescription); i++ {
+		a := m.ProgramDescription[i]
 		o := reasonForAction(a, causalitypath, causeProlog, plan)
-		markReasons(m.GoalDescription.Specification, o)
+		markReasons(m.GoalDescription, o)
 		o = keepOnlyReasonsForThisActionToken(o, i, plan)
 		s := StateAt(i, m)
 		n := model.ActionConcept{ActionName: a, Context: s, Causes: o}

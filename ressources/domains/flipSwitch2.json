@@ -28,7 +28,6 @@
         }
     ],
     "InitialStateDescription": {
-        "State": {
             "Time": 0,
             "State": [
                 {
@@ -36,19 +35,14 @@
                     "Name": "on"
                 }
             ]
-        }
-    },
-    "GoalDescription": {
-        "Specification": [
+        },
+    "GoalDescription": [
             {
                 "Polarity": true,
                 "Name": "on"
             }
-        ]
-    },
-    "ProgramDescription": {
-        "ActionSequence": [
+        ],
+    "ProgramDescription": [
             "FlipSwitch", "FlipSwitch"
         ]
-    }
 }

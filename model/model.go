@@ -28,11 +28,6 @@ func (a Action) Applicable(s State) bool {
 	return true
 }
 
-// Goal represents a goal description
-type Goal struct {
-	Specification []Literal
-}
-
 // State represents a state
 type State struct {
 	Time  int
@@ -72,22 +67,12 @@ func (s *State) SetStateTime(t int) {
 	s.Time = t
 }
 
-// InitialState represents the initial state
-type InitialState struct {
-	State State
-}
-
-// Program represents the action sequence
-type Program struct {
-	ActionSequence []string
-}
-
 // DomainDescription represents actions, initial state, goal, and program
 type DomainDescription struct {
 	ActionDescription       []Action
-	InitialStateDescription InitialState
-	GoalDescription         Goal
-	ProgramDescription      Program
+	InitialStateDescription State
+	GoalDescription         []Literal
+	ProgramDescription      []string
 }
 
 // Reason represents a reason

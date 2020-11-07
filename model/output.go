@@ -32,13 +32,13 @@ func ToCausalityOutput(domain DomainDescription) string {
 	}
 	// InitialState
 	init := ""
-	for _, a := range domain.InitialStateDescription.State.State {
+	for _, a := range domain.InitialStateDescription.State {
 		init = init + "," + literalToString(a)
 	}
 	s = s + fmt.Sprintf("init([%s]).\n", init[1:])
 	// Goal
 	goal := ""
-	for _, a := range domain.GoalDescription.Specification {
+	for _, a := range domain.GoalDescription {
 		goal = goal + "," + literalToString(a)
 	}
 	s = s + fmt.Sprintf("goal([%s]).", goal[1:])
@@ -48,7 +48,7 @@ func ToCausalityOutput(domain DomainDescription) string {
 // OutputProgram outputs the program
 func OutputProgram(domain DomainDescription) string {
 	var s string
-	for _, a := range domain.ProgramDescription.ActionSequence {
+	for _, a := range domain.ProgramDescription {
 		s = s + ":" + strings.ToLower(a)
 	}
 	return s[1:]

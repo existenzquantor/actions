@@ -29,7 +29,7 @@ func main() {
 	case "types":
 		ac := reasoning.ActionConcepts(m, c, d, causalitypath)
 		ap, _ := filepath.Abs("./ressources/ontologies/" + *ontology + ".owl")
-		ads := reasoning.ActionDescriptionsFromActionConcepts(ap, *hermitpath, ac, m.ProgramDescription.ActionSequence)
+		ads := reasoning.ActionDescriptionsFromActionConcepts(ap, *hermitpath, ac, m.ProgramDescription)
 		result := model.ToJSON(ads)
 		fmt.Printf("%v\n", string(result))
 	}

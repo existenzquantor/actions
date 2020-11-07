@@ -16,7 +16,6 @@ Declaration(Class(:on))
 Declaration(ObjectProperty(:causes))
 Declaration(ObjectProperty(:context))
 
-
 EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context :on)))
 
 

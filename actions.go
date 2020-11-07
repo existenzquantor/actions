@@ -11,7 +11,7 @@ import (
 func main() {
 	jsonFile := flag.String("domain", "./ressources/flipSwitch2.json", "JSON file that contains a domain description.")
 	causalitypath := flag.String("causalitypath", "../causality/", "Path to the executable of causal reasoning, see https://github.com/existenzquantor/causality")
-	ontology := flag.String("ontology", "https://raw.githubusercontent.com/existenzquantor/actions/master/ressources/FlipSwitch.owl", "IRI of the Ontology to use")
+	ontology := flag.String("ontology", "./ressources/FlipSwitch.owl", "Path to the Ontology to use")
 	outputformat := flag.String("outputformat", "types", "types | concepts")
 	hermitpath := flag.String("hermitpath", "./ressources/", "Path to the HermiT OWL reasoner")
 

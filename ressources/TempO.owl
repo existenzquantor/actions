@@ -1,8 +1,0 @@
-Prefix(:=<FlipSwitch#>)
-Ontology(<Plan>
-Import(<file:///Users/fl/Git/actions/ressources/FlipSwitch.owl>)
-
-
-SubClassOf(:Action0 :TurnOn)
-
-)

@@ -43,6 +43,15 @@ func (s *State) containsStateLiteral(l Literal) bool {
 	return false
 }
 
+func (s *State) containsStateLiteralName(l Literal) bool {
+	for _, m := range s.State {
+		if m.Name == l.Name {
+			return true
+		}
+	}
+	return false
+}
+
 func (s *State) addLiteral(l Literal) {
 	s.State = append(s.State, l)
 }
@@ -55,7 +64,7 @@ func (s *State) ApplyAction(a Action) {
 			newState.addLiteral(Literal{Name: ac.Name, Polarity: ac.Polarity})
 		}
 		for i := 0; i < len(s.State); i++ {
-			if !newState.containsStateLiteral(s.State[i]) {
+			if !newState.containsStateLiteralName(s.State[i]) {
 				newState.addLiteral(s.State[i])
 			}
 		}

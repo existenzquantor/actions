@@ -14,7 +14,7 @@ type Literal struct {
 // Action represents an action with name, effect, and preconditions
 type Action struct {
 	Name         string
-	Effect       Literal
+	Effect       []Literal
 	Precondition []Literal
 }
 
@@ -51,10 +51,11 @@ func (s *State) addLiteral(l Literal) {
 func (s *State) ApplyAction(a Action) {
 	if a.Applicable(*s) {
 		newState := State{}
+		for _, ac := range a.Effect {
+			newState.addLiteral(Literal{Name: ac.Name, Polarity: ac.Polarity})
+		}
 		for i := 0; i < len(s.State); i++ {
-			if s.State[i].Name == a.Effect.Name {
-				newState.addLiteral(Literal{Name: a.Effect.Name, Polarity: a.Effect.Polarity})
-			} else {
+			if !newState.containsStateLiteral(s.State[i]) {
 				newState.addLiteral(s.State[i])
 			}
 		}

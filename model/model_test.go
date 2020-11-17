@@ -8,8 +8,8 @@ import (
 func getDomainDescription() DomainDescription {
 	on := Literal{Polarity: true, Name: "on"}
 	off := Literal{Polarity: false, Name: "on"}
-	a1 := Action{Name: "FlipSwitch", Effect: on, Precondition: []Literal{off}}
-	a2 := Action{Name: "FlipSwitch", Effect: off, Precondition: []Literal{on}}
+	a1 := Action{Name: "FlipSwitch", Effect: []Literal{on}, Precondition: []Literal{off}}
+	a2 := Action{Name: "FlipSwitch", Effect: []Literal{off}, Precondition: []Literal{on}}
 	init := State{State: []Literal{off}}
 	goal := []Literal{on}
 	program := []string{a1.Name}

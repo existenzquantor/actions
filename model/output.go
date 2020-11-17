@@ -19,11 +19,13 @@ func literalToString(l Literal) string {
 func ToCausalityOutput(domain DomainDescription) string {
 	var s string
 	// Actions
-	var prec string
-	var eff string
 	for _, a := range domain.ActionDescription {
-		eff = literalToString(a.Effect)
-		prec = "["
+		eff := "["
+		for _, b := range a.Effect {
+			eff = eff + literalToString(b)
+		}
+		eff = eff + "]"
+		prec := "["
 		for _, b := range a.Precondition {
 			prec = prec + literalToString(b)
 		}

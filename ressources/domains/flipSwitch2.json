@@ -2,10 +2,12 @@
     "ActionDescription": [
         {
             "Name": "FlipSwitch",
-            "Effect": {
+            "Effect": [
+                {
                 "Polarity": true,
                 "Name": "on"
-            },
+                }
+            ],
             "Precondition": [
                 {
                     "Polarity": false,
@@ -15,10 +17,12 @@
         },
         {
             "Name": "FlipSwitch",
-            "Effect": {
+            "Effect": [
+                {
                 "Polarity": false,
                 "Name": "on"
-            },
+                }
+            ],
             "Precondition": [
                 {
                     "Polarity": true,

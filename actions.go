@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
 	"path/filepath"
 
 	"github.com/existenzquantor/actions/model"
@@ -11,7 +12,7 @@ import (
 
 func main() {
 	jsonFile := *flag.String("domain", "flipSwitch2", "JSON file that contains a domain description.")
-	causalitypath := *flag.String("causalitypath", "../causality/", "Path to the executable of causal reasoning, see https://github.com/existenzquantor/causality")
+	causalitypath := *flag.String("causalitypath", os.Getenv("CAUSALITY"), "Path to the executable of causal reasoning, see https://github.com/existenzquantor/causality")
 	ontology := *flag.String("ontology", "FlipSwitch", "Path to the Ontology to use")
 	outputformat := *flag.String("outputformat", "types", "types | concepts")
 	hermitpath := *flag.String("hermitpath", "./ressources/", "Path to the HermiT OWL reasoner")

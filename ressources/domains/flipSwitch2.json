@@ -42,7 +42,7 @@
         },
     "GoalDescription": [
             {
-                "Polarity": true,
+                "Polarity": false,
                 "Name": "on"
             }
         ],

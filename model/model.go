@@ -34,6 +34,11 @@ type State struct {
 	State []Literal
 }
 
+// Copy returns a copy of the given state
+func (s *State) Copy() State {
+	return State{Time: s.Time, State: s.State}
+}
+
 func (s *State) containsStateLiteral(l Literal) bool {
 	for _, m := range s.State {
 		if m.Polarity == l.Polarity && m.Name == l.Name {

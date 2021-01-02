@@ -16,7 +16,7 @@ lits_to_owl_strings(A, S, F) :-
     format(atom(X), " :~w", A),
     string_concat(S, X, F),!.
 lits_to_owl_strings([], S, SF) :-
-    format(atom(SF), " ObjectIntersectionOf(~w owl:Thing)", S).
+    format(atom(SF), " ObjectIntersectionOf(~w owl:Thing owl:Thing)", S).
 lits_to_owl_strings([A|R], S, F) :-
     lits_to_owl_strings(A, S, F2),
     lits_to_owl_strings(R, F2, F).

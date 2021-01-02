@@ -1,0 +1,7 @@
+Prefix(:=<TrolleyProblem#>)
+
+Ontology(<TrolleyProblem>
+
+EquivalentClasses(:Kill ObjectSomeValuesFrom(:causes ObjectUnionOf(:dead1 :dead5)))
+EquivalentClasses(:Rescue ObjectSomeValuesFrom(:causes ObjectUnionOf(ObjectComplementOf(:dead1) ObjectComplementOf(:dead5))))
+)

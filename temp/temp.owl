@@ -1,10 +1,9 @@
-Prefix(:=<FlipSwitch#>)
+Prefix(:=<TrolleyProblem#>)
 
-Ontology(<FlipSwitch>
+Ontology(<TrolleyProblem>
 
-EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext :on)))
-EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext ObjectComplementOf(:on))))
-EquivalentClasses(:Action0 ObjectIntersectionOf( :FlipSwitch ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:on) ObjectComplementOf(:yay) owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :yay ObjectComplementOf(:on) owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing))))
-EquivalentClasses(:Action1 ObjectIntersectionOf( :FlipSwitch ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( :on :yay owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing))))
+EquivalentClasses(:Kill ObjectSomeValuesFrom(:causes ObjectUnionOf(:dead1 :dead5)))
+EquivalentClasses(:Rescue ObjectSomeValuesFrom(:causes ObjectUnionOf(ObjectComplementOf(:dead1) ObjectComplementOf(:dead5))))
+EquivalentClasses(:Action0 ObjectIntersectionOf( :wait ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( owl:Thing owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( owl:Thing owl:Thing))))
 
 )

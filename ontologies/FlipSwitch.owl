@@ -1,15 +1,7 @@
 Prefix(:=<FlipSwitch#>)
 
-Ontology(<FlipSwitchy>
+Ontology(<FlipSwitch>
 
-Declaration(Class(:FlipSwitch))
-Declaration(Class(:TurnOff))
-Declaration(Class(:TurnOn))
-Declaration(Class(:on))
-Declaration(ObjectProperty(:causes))
-Declaration(ObjectProperty(:context))
-Declaration(ObjectProperty(:hasReason))
-
-EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context :on)))
-EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context ObjectComplementOf(:on))))
+EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext :on)))
+EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext ObjectComplementOf(:on))))
 )

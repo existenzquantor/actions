@@ -1,0 +1,18 @@
+Prefix(:=<FlipSwitch#>)
+
+Ontology(<FlipSwitchy>
+
+Declaration(Class(:FlipSwitch))
+Declaration(Class(:TurnOff))
+Declaration(Class(:TurnOn))
+Declaration(Class(:on))
+Declaration(ObjectProperty(:causes))
+Declaration(ObjectProperty(:context))
+Declaration(ObjectProperty(:hasReason))
+
+EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context :on)))
+EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:context ObjectComplementOf(:on))))
+EquivalentClasses(:Action0 ObjectIntersectionOf( :FlipSwitch ObjectSomeValuesFrom(:context ObjectIntersectionOf( ObjectComplementOf(:on) ObjectComplementOf(:yay) owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :yay ObjectComplementOf(:on) owl:Thing)) ObjectSomeValuesFrom(:hasReasons ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing))))
+EquivalentClasses(:Action1 ObjectIntersectionOf( :FlipSwitch ObjectSomeValuesFrom(:context ObjectIntersectionOf( :on :yay owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing)) ObjectSomeValuesFrom(:hasReasons ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing))))
+
+)

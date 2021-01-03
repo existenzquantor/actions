@@ -27,9 +27,9 @@ For instance, considering the Trolley Problem again, the action "pull" occurring
 ```
 EquivalentClasses(:Action0 
   ObjectIntersectionOf(:pull 
-   ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left))) 
-   ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :dead1 :left ObjectComplementOf(:dead5))) 
-   ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( ObjectComplementOf(:dead5)))
+   ObjectSomeValuesFrom(:inContext ObjectIntersectionOf(ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left))) 
+   ObjectSomeValuesFrom(:causes ObjectIntersectionOf(:dead1 :left ObjectComplementOf(:dead5))) 
+   ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf(ObjectComplementOf(:dead5)))
   ))
 ```
 

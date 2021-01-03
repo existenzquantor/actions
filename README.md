@@ -46,6 +46,8 @@ The action-type ontology is complemented by an action-domain model. Action-domai
 
 By convention, effect facts that have numbers as first arguments are external events. That is, if the event is called n, then after the n-th action, the event will fire, that is, the event's effects will obtain if the event's preconditions hold after the n-th action. n starts counting with 0. Thus, in the particular example, the one person will be dead if pull is the first action in the plan.
 
+Note that literals used in the action domain will be represented as concepts in the action-type representation of the actions (see above).
+
 
 
 ## Running the Tool

@@ -26,9 +26,11 @@ To compute the action types of actions in an action plan, the tool requires an a
 For instance, considering the Trolley Problem again, the action "pull" occurring in an action plan, may be represented like this:
 ```
 EquivalentClasses(:Action0 
-  ObjectIntersectionOf( :pull ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left))) 
-  ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :dead1 :left ObjectComplementOf(:dead5))) 
-  ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( ObjectComplementOf(:dead5)))))
+  ObjectIntersectionOf(:pull 
+   ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left))) 
+   ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :dead1 :left ObjectComplementOf(:dead5))) 
+   ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( ObjectComplementOf(:dead5)))
+  ))
 ```
 
 This line says that Action0 (thus, the first action in the plan) has "pull" as given name and it is is performed in a state where the five persons on the one track are not dead, the other person on the other track is not dead, the trolley is not directed towards the left track. Moreover, the action causes the death of the one person, it causes the trolley to be directed onto the left track, and it causes the survival of the five persons. Finally, the action is performed for the reason to save the lives of the five persons.

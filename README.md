@@ -37,10 +37,16 @@ This line says that Action0 (thus, the first action in the plan) has "pull" as g
 
 Hence, when you design your action-type ontology, you may want to make use of the relations "inContext", "causes", and "forReasons" as indicated by this example.
 
-An example ontology for the Trolley Problem can be found here: https://github.com/existenzquantor/actions/blob/master/ontologies/Trolley.owl This ontology defined the action types Kill (causing death) and Rescue (causing non-death).
+An example ontology for the Trolley Problem can be found here: https://github.com/existenzquantor/actions/blob/master/ontologies/Trolley.owl This ontology defines the action types Kill (causing death) and Rescue (causing non-death).
 
 
 ## Modeling an Action Domain
+
+The action-type ontology is complemented by an action-domain model. Action-domain models live in the "domains" directory. These model the actions in terms of preconditions and effects, they model events, the agent's goals, the initial state, and the plan the agent actually performs. As an example, consider the trolley domain here: https://github.com/existenzquantor/actions/blob/master/domains/trolley.pl . It says that pulling the lever results in the trolley be directed onto the left track, if it is not directed onto the left track before the action is performed. Thus, the first argument of the effect fact is the action name, the second one is a list of literals that must hold as precondition for the effect to obtain in the successor state (third argument, again a list of literals).
+
+By convention, effect facts that have numbers as first arguments are external events. That is, if the event is called n, then after the n-th action, the event will fire, that is, the event's effects will obtain if the event's preconditions hold after the n-th action. n starts counting with 0. Thus, in the particular example, the one person will be dead if pull is the first action in the plan.
+
+
 
 ## Running the Tool
 

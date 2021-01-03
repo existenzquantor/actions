@@ -37,6 +37,8 @@ This line says that Action0 (thus, the first action in the plan) has "pull" as g
 
 Hence, when you design your action-type ontology, you may want to make use of the relations "inContext", "causes", and "forReasons" as indicated by this example.
 
+An example ontology for the Trolley Problem can be found here: https://github.com/existenzquantor/actions/blob/master/ontologies/Trolley.owl This ontology defined the action types Kill (causing death) and Rescue (causing non-death).
+
 
 ## Modeling an Action Domain
 

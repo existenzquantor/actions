@@ -49,6 +49,16 @@ By convention, effect facts that have numbers as first arguments are external ev
 Note that literals used in the action domain will be represented as concepts in the action-type representation of the actions (see above).
 
 
-
 ## Running the Tool
+
+Finally, to retrieve the action descriptions, the following command must be executed in the shell: ```swipl actions.pl <domain> <ontology>```. In the example, we type ```swipl actions.pl trolley Trolley```. The tool will find ```trolley.pl``` in the domain directory, and ```Trolley.owl``` in the ontology directory. As a result, we get ```[[Rescue,Kill,pull]]```. This is a list of lists of action types, one list for each actions in the action plan. In the Trolley example, there is only one action (viz., pull), and it can be described as from type Rescue, Kill, or just pull.
+
+Also try the other example domain:
+```
+> swipl actions.pl flipswitch2 FlipSwitch
+[[FlipSwitch,TurnOn],[FlipSwitch,TurnOff]]
+```
+In this example, the action FlipSwitch is performed twice (starting from a state where the light is off). Hence, the first FlipSwitch action is also of type turning-the-light-on (TurnOn), and the second FlipSwitch action turns the light off (TurnOff).
+
+
 

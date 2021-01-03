@@ -4,6 +4,9 @@ This is designed as a tool for causal and terminological reasoning about actions
 
 The tool is originally motivated by the desire to modeling the phenomena that an action can be described in very different terms. For instance, consider the Trolley Problem (see https://en.wikipedia.org/wiki/Trolley_problem). The act of pulling the lever can be described as just pulling a lever, or as an act of killing one person, or as an act of rescuing the lives of five persons. Depending on the description chosen, the action be evaluated differently with respect to moral permissibility. 
 
+The approach was first presented in: *Lindner F. Permissibility-under-a-description reasoning for deontological robots. To Appear in: Proceedings of RoboPhilosophy 2020; 2020*. A preprint is available here: http://existenzquantor.info/wp-content/uploads/2020/11/FL_RP_2020_Preprint.pdf
+
+
 # Installation
 
 To run the tool, SWI Prolog (https://www.swi-prolog.org/) must be installed on the system. SWI Prolog is available for many operating systems. In a MacOS environment, you can install SWI Prolog using brew by typing ```brew install swipl```, under Ubuntu Linux it is ```apt install swipl```, and binaries for Windows are also available on the SWI Prolog download website. 

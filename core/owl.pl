@@ -66,7 +66,9 @@ read_owl_file(Stream,[]):-
 read_owl_file(Stream,[X|L]):- 
     \+  at_end_of_stream(Stream), 
     read_line_to_codes(Stream,Codes),
-    atom_chars(X, Codes),
+    (\+ (Codes = [35 | _]) ->
+    atom_chars(X, Codes);
+    atom_chars(X, [])),
     read_owl_file(Stream,L).
 
 append_owl(Ontology, Additional, Onew) :-

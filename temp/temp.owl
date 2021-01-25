@@ -28,5 +28,6 @@ EquivalentClasses(:Rescue ObjectSomeValuesFrom(:causes ObjectUnionOf(ObjectCompl
 
 
 EquivalentClasses(:Action0 ObjectIntersectionOf( :pull ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :dead1 :left ObjectComplementOf(:dead5) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( ObjectComplementOf(:dead5) owl:Thing owl:Thing))))
+EquivalentClasses(:Plan0 ObjectIntersectionOf(:plan ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( :dead1 :left ObjectComplementOf(:dead5) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( ObjectComplementOf(:dead5) owl:Thing owl:Thing))))
 
 )

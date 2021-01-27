@@ -23,7 +23,7 @@ To get started, first clone this github repository. Currently, it is assumed tha
 
 To compute the action types of actions in an action plan, the tool requires an action-type ontology. You are pretty free to define an action-type ontology you like. One convenient way of doing that is using Protégé (see https://protege.stanford.edu). There are, however, two constraints to consider:
 
-* The Ontology has to be stored in the ontologies folder, it has to have the ending ".owl", and it must be written in Functional OWL Syntax. Protégé can import and expert in the format.
+* The Ontology has to be stored in the ontologies folder, it has to have the ending ".owl", and it must be written in Functional OWL Syntax. Protégé can import and export that format.
 * Every action in the action plan will be turned into a particular representation consisting of four components:
   * the action's given name
   * the context in which the action is performed (i.e., the state it is applied to during execution),

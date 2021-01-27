@@ -65,7 +65,7 @@ Also try the other example domain:
 > swipl actions.pl flipswitch2 FlipSwitch
 [[plan], [[FlipSwitch,TurnOn],[FlipSwitch,TurnOff]]]
 ```
-In this example, the action FlipSwitch is performed twice (starting from a state where the light is off). The plan as a whole does not cause anything, thus, it has only a trivial description: It's a plan. However, the individual actions do have richer descriptions: the first FlipSwitch action is also of type turning-the-light-on (TurnOn), and the second FlipSwitch action turns the light off (TurnOff).
+In this example, the action FlipSwitch is performed twice (starting from a state where the light is off). The plan as a whole does not cause anything, thus, it has only a trivial description: It's a plan. The agent of that plan may explain its behavior by saying something like: _I switch the light on and off because I want to_. However, the individual actions do have richer descriptions: the first FlipSwitch action is also of type turning-the-light-on (TurnOn), and the second FlipSwitch action turns the light off (TurnOff).
 
 The file ```actions.pl``` can also be made executable (```chmod +x actions.pl```). Then you can also run:
 ```bash

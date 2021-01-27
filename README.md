@@ -73,3 +73,17 @@ The file ```actions.pl``` can also be made executable (```chmod +x actions.pl```
 [[plan], [[FlipSwitch,TurnOn],[FlipSwitch,TurnOff]]]
 ```
 
+It is also possible to explicitly query the tool for the set of descriptions of the plan or for some particular action within that plan. For querying the descriptions of the plan, just append "plan" as third argument:
+```bash
+> ./actions.pl flipswitch2 FlipSwitch plan
+[plan]
+```
+
+For querying the n-th action in the plan, just append "n" as third argument:
+```bash
+> ./actions.pl flipswitch2 FlipSwitch 0
+[FlipSwitch,TurnOff]
+> ./actions.pl flipswitch2 FlipSwitch 1
+[FlipSwitch,TurnOn]
+```
+Note that the count starts with 0, that is, the first action in the plan has index 0.

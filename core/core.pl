@@ -1,4 +1,4 @@
-:- module(actions_core, [classify_actions/1, classify_plan/1, prepare_owl/1, names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3]).
+:- module(actions_core, [classify_actions/1, classify_action/2, classify_plan/1, prepare_owl/1, names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3]).
 :- use_module("owl.pl", [prepare_owl/1]).
 :- use_module("helpers.pl", [bash_command/2, without_last/2, without_first_two/2, empty_once/1]).
 :- use_module("../../causality/core/interpreter.pl", [do/3, action/1, finally/2]).

@@ -13,7 +13,7 @@ A preprint is available here: http://existenzquantor.info/wp-content/uploads/202
 
 # Installation
 
-To run the tool, SWI Prolog (https://www.swi-prolog.org/) must be installed on the system. SWI Prolog is available for many operating systems. In a MacOS environment, you can install SWI Prolog using brew by typing ```brew install swipl```, under Ubuntu Linux it is ```apt install swipl```, and binaries for Windows are also available on the SWI Prolog download website. 
+To run the tool, SWI Prolog (https://www.swi-prolog.org/) must be installed on the system. SWI Prolog is available for many operating systems. In a MacOS environment, you can install SWI Prolog using brew by typing ```brew install swipl```, under Ubuntu Linux it is ```apt install swipl```, and binaries for Windows are also available on the SWI Prolog download website. Moreover, a Java Virtual Machine must be installed on the system.
 
 To get started, first clone this github repository. Currently, it is assumed that the folder containing the causality library (https://github.com/existenzquantor/causality) is located next to the hera2 folder, i.e., in some common parent folder. Thus, you may need to clone the causality github repository, as well.
 

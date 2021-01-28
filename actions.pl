@@ -1,6 +1,6 @@
 #!/usr/bin/env swipl
 :- initialization(main, main).
-:- use_module("./core/core.pl", [classify_actions/1, classify_action/2, classify_plan/1, prepare_owl/1]).
+:- use_module("./core/core.pl", [classify_actions/1, classify_action/2, classify_plan/1, prepare_owl/2]).
 
 main(Argv) :-
     nth0(0, Argv, Domain),
@@ -10,7 +10,8 @@ main(Argv) :-
     string_concat("./ontologies/", Ontology, OntologyPath0),
     string_concat(OntologyPath0, ".owl", OntologyPath),
     consult(DomainPath),
-    prepare_owl(OntologyPath),
+    plan(Plan),
+    prepare_owl(Plan, OntologyPath),
     process(Argv).
 
 process(Argv) :-

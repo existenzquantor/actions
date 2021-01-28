@@ -1,9 +1,8 @@
-:- module(actions_owl, [prepare_owl/1]).
-:- use_module("core.pl", [names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3]).
+:- module(actions_owl, [prepare_owl/2]).
+:- use_module("core.pl", [names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3, reasons/1]).
 :- use_module("helpers.pl", [without_last/2]).
 
-prepare_owl(OntologyPath) :-
-    plan(Plan),
+prepare_owl(Plan, OntologyPath) :-
     to_owl(Plan, S),
     append_owl(OntologyPath, S, New),
     write_owl(New).
@@ -59,7 +58,7 @@ to_owl(S) :-
     causedFacts(E),
     lits_to_owl_strings(E, "", SFacts),
     % Reasons
-    goal(G),
+    reasons(G),
     intersection(E, G, R),
     lits_to_owl_strings(R, "", SReasons),
     format(atom(S), "EquivalentClasses(:Plan0 ObjectIntersectionOf(:plan ObjectSomeValuesFrom(:inContext~w) ObjectSomeValuesFrom(:causes~w) ObjectSomeValuesFrom(:forReasons~w)))\n", [SContexts, SFacts, SReasons]).

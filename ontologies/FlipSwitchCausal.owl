@@ -1,0 +1,8 @@
+Prefix(:=<FlipSwitch#>)
+
+Ontology(<FlipSwitch>
+
+EquivalentClasses(:TurnOn ObjectSomeValuesFrom(:causes :on))
+EquivalentClasses(:TurnOff ObjectSomeValuesFrom(:causes ObjectComplementOf(:on)))
+
+)

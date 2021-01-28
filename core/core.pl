@@ -1,7 +1,7 @@
-:- module(actions_core, [classify_actions/1, classify_action/2, classify_plan/1, prepare_owl/1, names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3]).
-:- use_module("owl.pl", [prepare_owl/1]).
+:- module(actions_core, [prepare_owl/2, classify_actions/1, classify_action/2, classify_plan/1, classify_all_plans/3, names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3, reasons/1]).
+:- use_module("owl.pl", [prepare_owl/2]).
 :- use_module("helpers.pl", [bash_command/2, without_last/2, without_first_two/2, empty_once/1]).
-:- use_module("../../causality/core/interpreter.pl", [do/3, action/1, finally/2]).
+:- use_module("../../causality/core/interpreter.pl", [do/3, action/1, finally/2, generate_plan/3]).
 :- use_module("../../causality/core/programs.pl", [program_to_list/2]).
 :- use_module("../../causality/core/causality.pl", [cause_empty_temporal/3, reason_empty_temporal/4,reason_empty_temporal_nogoal/4]).
 
@@ -25,6 +25,24 @@ classify_plan(L) :-
     S = "java -jar ./reasoner/HermiT.jar -S:Plan0 ./temp/temp.owl",
     bash_command(S, O),
     extract_answer_from_hermit(O, L).
+
+generate_all_options(PathLength, L) :-
+    findall(P, generate_plan(PathLength, [], P), L0),
+    sort(L0, L).
+
+classify_all_plans(PlanLength, OntologyPath, Result) :-
+    generate_all_options(PlanLength, Plans),
+    classify_all_plans(Plans, OntologyPath, [], Result).
+classify_all_plans([], _, Plans, Plans).
+classify_all_plans([P | Plans], OntologyPath, CurPlans, Result) :-
+    retractall(plan(_)),
+    assertz(plan(P)),
+    causedFacts(CF),
+    retractall(goal(_)),
+    assertz(goal(CF)),
+    prepare_owl(P, OntologyPath),
+    classify_plan(L),
+    classify_all_plans(Plans, OntologyPath, [[P, L] | CurPlans], Result).
 
 names(P, L) :-
     program_to_list(P, L).
@@ -53,6 +71,8 @@ reasons(N, Program, Facts):-
     nth0(N, PL, Action),
     findall(Reason, (reason_empty_temporal(Reason, Action, Program, Witness), program_to_list(Witness, WL), nth0(N, WL, empty), empty_once(WL)), F),
     sort(F, Facts).
+reasons(G) :-
+    goal(G).
 
 extract_answer_from_hermit(O, L) :-
     split_string(O, "\n", "", L0),

@@ -1,7 +1,7 @@
 effect('FlipSwitch', [on], [not(on)]).
-effect('FlipSwitch', [not(on)], [on, yay]).
+effect('FlipSwitch', [not(on)], [on]).
 
-init([not(on), not(yay)]).
+init([not(on)]).
 goal([not(on)]).
 plan('FlipSwitch':'FlipSwitch').
 

@@ -4,4 +4,5 @@ Ontology(<FlipSwitch>
 
 EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext :on)))
 EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext ObjectComplementOf(:on))))
+
 )

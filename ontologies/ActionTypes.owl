@@ -26,5 +26,4 @@ SubObjectPropertyOf(:forReasons :causes)
 FunctionalObjectProperty(:forReasons)
 
 
-
 )

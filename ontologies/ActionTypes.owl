@@ -1,0 +1,39 @@
+Prefix(:=<http://www.semanticweb.org/fl/ontologies/2021/0/ActionTypes#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.semanticweb.org/fl/ontologies/2021/0/ActionTypes>
+
+Declaration(Class(:Action))
+Declaration(Class(:State))
+Declaration(ObjectProperty(:causes))
+Declaration(ObjectProperty(:context))
+Declaration(ObjectProperty(:forReasons))
+############################
+#   Object Properties
+############################
+
+# Object Property: :causes (:causes)
+
+FunctionalObjectProperty(:causes)
+ObjectPropertyDomain(:causes :Action)
+ObjectPropertyRange(:causes :State)
+
+# Object Property: :context (:context)
+
+FunctionalObjectProperty(:context)
+ObjectPropertyDomain(:context :Action)
+ObjectPropertyRange(:context :State)
+
+# Object Property: :forReasons (:forReasons)
+
+SubObjectPropertyOf(:forReasons :causes)
+FunctionalObjectProperty(:forReasons)
+
+
+
+)

@@ -1,10 +1,12 @@
-:- module(action_helpers, [without_last/2, without_first_two/2, bash_command/2, empty_once/1]).
+:- module(action_helpers, [without_last/2, without_first/2, bash_command/2, empty_once/1]).
 
 without_last([_], []).
 without_last([X|Xs], [X|WithoutLast]) :- 
     without_last(Xs, WithoutLast).
 
 without_first_two([_, _ | L], L).
+
+without_first([_ | L], L).
 
 bash_command(Command, Output) :-
     process_create(path(bash),

@@ -50,7 +50,7 @@ to_owl(Plan, N, S) :-
     % Reasons
     reasons(N, Plan, R),
     lits_to_owl_strings(R, "", SReasons),
-    format(atom(S), "EquivalentClasses(:Action~w ObjectIntersectionOf(~w ObjectSomeValuesFrom(:inContext~w) ObjectSomeValuesFrom(:causes~w) ObjectSomeValuesFrom(:forReasons~w)))\n", [N, SName, SContexts, SFacts, SReasons]).
+    format(atom(S), "EquivalentClasses(:Action~w ObjectIntersectionOf(~w ObjectSomeValuesFrom(action:inContext~w) ObjectSomeValuesFrom(action:causes~w) ObjectSomeValuesFrom(action:forReasons~w)))\n", [N, SName, SContexts, SFacts, SReasons]).
 to_owl(S) :-
     init(IS),
     lits_to_owl_strings(IS, "", SContexts),
@@ -61,7 +61,7 @@ to_owl(S) :-
     reasons(G),
     intersection(E, G, R),
     lits_to_owl_strings(R, "", SReasons),
-    format(atom(S), "EquivalentClasses(:Plan0 ObjectIntersectionOf(:plan ObjectSomeValuesFrom(:inContext~w) ObjectSomeValuesFrom(:causes~w) ObjectSomeValuesFrom(:forReasons~w)))\n", [SContexts, SFacts, SReasons]).
+    format(atom(S), "EquivalentClasses(:Plan0 ObjectIntersectionOf(:plan ObjectSomeValuesFrom(action:inContext~w) ObjectSomeValuesFrom(action:causes~w) ObjectSomeValuesFrom(action:forReasons~w)))\n", [SContexts, SFacts, SReasons]).
 
 
 write_owl(Lines) :-

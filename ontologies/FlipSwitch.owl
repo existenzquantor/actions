@@ -1,8 +1,10 @@
 Prefix(:=<FlipSwitch#>)
+Prefix(action:=<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes#>)
 
 Ontology(<FlipSwitch>
+Import(<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes.owl>)
 
-EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext :on)))
-EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(:inContext ObjectComplementOf(:on))))
+EquivalentClasses(:TurnOff ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(action:inContext :on)))
+EquivalentClasses(:TurnOn ObjectIntersectionOf(:FlipSwitch ObjectSomeValuesFrom(action:inContext ObjectComplementOf(:on))))
 
 )

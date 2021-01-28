@@ -1,18 +1,19 @@
-Prefix(:=<http://www.semanticweb.org/fl/ontologies/2021/0/TrolleyProblem#>)
+Prefix(:=<http://www.semanticweb.org/fl/ontologies/2021/0/Trolley#>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
 Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
 Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
 Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(action:=<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes#>)
 
 
-Ontology(<http://www.semanticweb.org/fl/ontologies/2021/0/TrolleyProblem>
+Ontology(<http://www.semanticweb.org/fl/ontologies/2021/0/Trolley>
+Import(<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes.owl>)
 
 Declaration(Class(:Kill))
 Declaration(Class(:Rescue))
 Declaration(Class(:dead1))
 Declaration(Class(:dead5))
-Declaration(ObjectProperty(:causes))
 
 ############################
 #   Classes
@@ -20,11 +21,11 @@ Declaration(ObjectProperty(:causes))
 
 # Class: :Kill (:Kill)
 
-EquivalentClasses(:Kill ObjectSomeValuesFrom(:causes ObjectUnionOf(:dead1 :dead5)))
+EquivalentClasses(:Kill ObjectSomeValuesFrom(action:causes ObjectUnionOf(:dead1 :dead5)))
 
 # Class: :Rescue (:Rescue)
 
-EquivalentClasses(:Rescue ObjectSomeValuesFrom(:causes ObjectUnionOf(ObjectComplementOf(:dead1) ObjectComplementOf(:dead5))))
+EquivalentClasses(:Rescue ObjectSomeValuesFrom(action:causes ObjectUnionOf(ObjectComplementOf(:dead1) ObjectComplementOf(:dead5))))
 
 
 )

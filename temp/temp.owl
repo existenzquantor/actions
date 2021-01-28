@@ -1,12 +1,14 @@
 Prefix(:=<FlipSwitch#>)
+Prefix(action:=<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes#>)
 
 Ontology(<FlipSwitch>
+Import(<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes.owl>)
 
-EquivalentClasses(:TurnOn ObjectSomeValuesFrom(:causes :on))
-EquivalentClasses(:TurnOff ObjectSomeValuesFrom(:causes ObjectComplementOf(:on)))
+EquivalentClasses(:TurnOn ObjectSomeValuesFrom(action:causes :on))
+EquivalentClasses(:TurnOff ObjectSomeValuesFrom(action:causes ObjectComplementOf(:on)))
 
-EquivalentClasses(:Action0 ObjectIntersectionOf( :empty ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( owl:Thing owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( owl:Thing owl:Thing))))
-EquivalentClasses(:Action1 ObjectIntersectionOf( :empty ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( owl:Thing owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( owl:Thing owl:Thing))))
-EquivalentClasses(:Plan0 ObjectIntersectionOf(:plan ObjectSomeValuesFrom(:inContext ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(:causes ObjectIntersectionOf( owl:Thing owl:Thing)) ObjectSomeValuesFrom(:forReasons ObjectIntersectionOf( owl:Thing owl:Thing))))
+EquivalentClasses(:Action0 ObjectIntersectionOf( :FlipSwitch ObjectSomeValuesFrom(action:inContext ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:causes ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:forReasons ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing))))
+EquivalentClasses(:Action1 ObjectIntersectionOf( :FlipSwitch ObjectSomeValuesFrom(action:inContext ObjectIntersectionOf( :on owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:causes ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:forReasons ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing))))
+EquivalentClasses(:Plan0 ObjectIntersectionOf(:plan ObjectSomeValuesFrom(action:inContext ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:causes ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:forReasons ObjectIntersectionOf( ObjectComplementOf(:on) owl:Thing owl:Thing))))
 
 )

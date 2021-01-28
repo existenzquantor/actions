@@ -1,6 +1,6 @@
 :- module(actions_core, [prepare_owl/2, classify_actions/1, classify_action/2, classify_plan/1, classify_all_plans/3, names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3, reasons/1]).
 :- use_module("owl.pl", [prepare_owl/2]).
-:- use_module("helpers.pl", [bash_command/2, without_last/2, without_first_two/2, empty_once/1]).
+:- use_module("helpers.pl", [bash_command/2, without_last/2, without_first/2, empty_once/1]).
 :- use_module("../../causality/core/interpreter.pl", [do/3, action/1, finally/2, generate_plan/3]).
 :- use_module("../../causality/core/programs.pl", [program_to_list/2]).
 :- use_module("../../causality/core/causality.pl", [cause_empty_temporal/3, reason_empty_temporal/4,reason_empty_temporal_nogoal/4]).
@@ -77,7 +77,7 @@ reasons(G) :-
 extract_answer_from_hermit(O, L) :-
     split_string(O, "\n", "", L0),
     without_last(L0, L1),
-    without_first_two(L1, L2),
+    without_first(L1, L2),
     extract_actions(L2, [], L).
 
 extract_actions([], L, L).

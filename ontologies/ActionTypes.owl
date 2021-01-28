@@ -11,16 +11,16 @@ Ontology(<https://raw.githubusercontent.com/existenzquantor/actions/master/ontol
 Declaration(Class(:Action))
 Declaration(Class(:State))
 Declaration(ObjectProperty(:causes))
-Declaration(ObjectProperty(:context))
+Declaration(ObjectProperty(:inContext))
 Declaration(ObjectProperty(:forReasons))
 
 FunctionalObjectProperty(:causes)
 ObjectPropertyDomain(:causes :Action)
 ObjectPropertyRange(:causes :State)
 
-FunctionalObjectProperty(:context)
-ObjectPropertyDomain(:context :Action)
-ObjectPropertyRange(:context :State)
+FunctionalObjectProperty(:inContext)
+ObjectPropertyDomain(:inContext :Action)
+ObjectPropertyRange(:inContext :State)
 
 SubObjectPropertyOf(:forReasons :causes)
 FunctionalObjectProperty(:forReasons)

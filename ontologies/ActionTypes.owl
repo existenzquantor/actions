@@ -13,6 +13,7 @@ Declaration(Class(:State))
 Declaration(ObjectProperty(:causes))
 Declaration(ObjectProperty(:context))
 Declaration(ObjectProperty(:forReasons))
+
 ############################
 #   Object Properties
 ############################

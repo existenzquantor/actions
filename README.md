@@ -86,4 +86,4 @@ For querying the n-th action in the plan, just append "n" as third argument:
 > ./actions.pl flipswitch2 FlipSwitch 1
 [FlipSwitch,TurnOn]
 ```
-Note that the count starts with 0, that is, the first action in the plan has index 0.
+Note that the count starts with 0, that is, the first action in the plan has index 0. Generally, querying for a single action is faster than querying the whole information using the two-arguments command and then extracting the desired information. However, querying multiple actions action-by-action may be much slower than querying the whole bunch of information and then extracting the desired information from the output.

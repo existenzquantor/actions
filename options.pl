@@ -1,4 +1,4 @@
-!/usr/bin/env swipl
+#!/usr/bin/env swipl
 :- initialization(main, main).
 :- use_module("./core/core.pl", [classify_all_plans/3]).
 

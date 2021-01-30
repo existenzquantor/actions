@@ -1,4 +1,4 @@
-:- module(actions_core, [prepare_owl/2, classify_actions/1, classify_action/2, classify_plan/1, classify_all_plans/3, names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3, reasons/1]).
+:- module(actions_core, [prepare_owl/2, classify_actions/1, classify_action/2, classify_plan/1, classify_all_plans/3, names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3, reasons/2]).
 :- use_module("owl.pl", [prepare_owl/2]).
 :- use_module("helpers.pl", [bash_command/2, without_last/2, without_first/2, empty_once/1]).
 :- use_module("../../causality/core/interpreter.pl", [do/3, action/1, finally/2, generate_plan/3]).
@@ -71,8 +71,9 @@ reasons(N, Program, Facts):-
     nth0(N, PL, Action),
     findall(Reason, (reason_empty_temporal(Reason, Action, Program, Witness), program_to_list(Witness, WL), nth0(N, WL, empty), empty_once(WL)), F),
     sort(F, Facts).
-reasons(G) :-
-    goal(G).
+reasons(CausedFacts, G) :-
+    goal(Goal),
+    intersection(CausedFacts, Goal, G).
 
 extract_answer_from_hermit(O, L) :-
     split_string(O, "\n", "", L0),

@@ -28,7 +28,7 @@ EquivalentClasses(:Kill ObjectSomeValuesFrom(action:causes ObjectUnionOf(:dead1 
 EquivalentClasses(:Rescue ObjectSomeValuesFrom(action:causes ObjectUnionOf(ObjectComplementOf(:dead1) ObjectComplementOf(:dead5))))
 
 
-EquivalentClasses(:Action0 ObjectIntersectionOf( :Pull ObjectSomeValuesFrom(action:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:causes ObjectIntersectionOf( :dead1 :left ObjectComplementOf(:dead5) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:forReasons ObjectIntersectionOf( ObjectComplementOf(:dead5) owl:Thing owl:Thing))))
-EquivalentClasses(:Plan0 ObjectIntersectionOf(:Plan ObjectSomeValuesFrom(action:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:causes ObjectIntersectionOf( :dead1 :left ObjectComplementOf(:dead5) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:forReasons ObjectIntersectionOf( ObjectComplementOf(:dead5) owl:Thing owl:Thing))))
+EquivalentClasses(:Action0 ObjectIntersectionOf( :empty ObjectSomeValuesFrom(action:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:causes ObjectIntersectionOf( owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:forReasons ObjectIntersectionOf( owl:Thing owl:Thing))))
+EquivalentClasses(:Plan0 ObjectIntersectionOf(:Plan ObjectSomeValuesFrom(action:inContext ObjectIntersectionOf( ObjectComplementOf(:dead5) ObjectComplementOf(:dead1) ObjectComplementOf(:left) owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:causes ObjectIntersectionOf( owl:Thing owl:Thing)) ObjectSomeValuesFrom(action:forReasons ObjectIntersectionOf( owl:Thing owl:Thing))))
 
 )

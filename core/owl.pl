@@ -1,4 +1,4 @@
-:- module(actions_owl, [prepare_owl/2]).
+- module(actions_owl, [prepare_owl/2]).
 :- use_module("core.pl", [names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3, reasons/2]).
 :- use_module("helpers.pl", [without_last/2]).
 
@@ -66,7 +66,7 @@ to_owl(Plan, N, S) :-
     reasons(N, Plan, R),
     lits_to_owl_strings(R, "", SReasons),
     lits_to_owl_strings_or(R, "", SReasonsOr),
-    format(atom(S), "EquivalentClasses(:Action~w ObjectIntersectionOf(~w ObjectSomeValuesFrom(action:inContext~w) ObjectAllValuesFrom(action:inContext~w) ObjectSomeValuesFrom(action:causes~w) ObjectAllValuesFrom(action:causes~w) ObjectSomeValuesFrom(action:forReasons~w) ObjectAllaluesFrom(action:forReasons~w)))\n", [N, SName, SContexts, SContextsOr, SFacts, SFactsOr, SReasons, SReasonsOr]).
+    format(atom(S), "EquivalentClasses(:Action~w ObjectIntersectionOf(~w ObjectSomeValuesFrom(action:inContext~w) ObjectAllValuesFrom(action:inContext~w) ObjectSomeValuesFrom(action:causes~w) ObjectAllValuesFrom(action:causes~w) ObjectSomeValuesFrom(action:forReasons~w) ObjectAllValuesFrom(action:forReasons~w)))\n", [N, SName, SContexts, SContextsOr, SFacts, SFactsOr, SReasons, SReasonsOr]).
 to_owl(S) :-
     init(IS),
     lits_to_owl_strings(IS, "", SContexts),

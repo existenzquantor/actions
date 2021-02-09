@@ -1,4 +1,4 @@
-Prefix(:=<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes#>)
+rix(:=<https://raw.githubusercontent.com/existenzquantor/actions/master/ontologies/ActionTypes#>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
 Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
@@ -13,22 +13,15 @@ Declaration(Class(:State))
 Declaration(ObjectProperty(:causes))
 Declaration(ObjectProperty(:forReasons))
 Declaration(ObjectProperty(:inContext))
-############################
-#   Object Properties
-############################
-
-# Object Property: :causes (:causes)
 
 FunctionalObjectProperty(:causes)
 ObjectPropertyDomain(:causes :Action)
 ObjectPropertyRange(:causes :State)
 
-# Object Property: :forReasons (:forReasons)
 
 SubObjectPropertyOf(:forReasons :causes)
 FunctionalObjectProperty(:forReasons)
 
-# Object Property: :inContext (:inContext)
 
 FunctionalObjectProperty(:inContext)
 ObjectPropertyDomain(:inContext :Action)

@@ -61,24 +61,24 @@ to_owl(Plan, N, S) :-
     % Caused Facts
     causedFacts(N, Plan, E),
     lits_to_owl_strings(E, "", SFacts),
-    lits_to_owl_strings_or(E, "", SFactsOr),
+    lits_to_owl_strings(E, "", SFactsOr),
     % Reasons
     reasons(N, Plan, R),
     lits_to_owl_strings(R, "", SReasons),
-    lits_to_owl_strings_or(R, "", SReasonsOr),
+    lits_to_owl_strings(R, "", SReasonsOr),
     format(atom(S), "EquivalentClasses(:Action~w ObjectIntersectionOf(~w ObjectSomeValuesFrom(action:inContext~w) ObjectAllValuesFrom(action:inContext~w) ObjectSomeValuesFrom(action:causes~w) ObjectAllValuesFrom(action:causes~w) ObjectSomeValuesFrom(action:forReasons~w) ObjectAllValuesFrom(action:forReasons~w)))\n", [N, SName, SContexts, SContextsOr, SFacts, SFactsOr, SReasons, SReasonsOr]).
 to_owl(S) :-
     init(IS),
     lits_to_owl_strings(IS, "", SContexts),
-    lits_to_owl_strings_or(IS, "", SContextsOr),
+    lits_to_owl_strings(IS, "", SContextsOr),
     % Caused Facts
     causedFacts(E),
     lits_to_owl_strings(E, "", SFacts),
-    lits_to_owl_strings_or(E, "", SFactsOr),
+    lits_to_owl_strings(E, "", SFactsOr),
     % Reasons
     reasons(E, R),
     lits_to_owl_strings(R, "", SReasons),
-    lits_to_owl_strings_or(R, "", SReasonsOr),
+    lits_to_owl_strings(R, "", SReasonsOr),
     format(atom(S), "EquivalentClasses(:Plan0 ObjectIntersectionOf(:Plan ObjectSomeValuesFrom(action:inContext~w) ObjectAllValuesFrom(action:inContext~w) ObjectSomeValuesFrom(action:causes~w) ObjectAllValuesFrom(action:causes~w) ObjectSomeValuesFrom(action:forReasons~w) ObjectAllValuesFrom(action:forReasons~w)))\n", [SContexts, SContextsOr, SFacts, SFactsOr, SReasons, SReasonsOr]).
 
 

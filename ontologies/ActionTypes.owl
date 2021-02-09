@@ -14,16 +14,11 @@ Declaration(ObjectProperty(:causes))
 Declaration(ObjectProperty(:forReasons))
 Declaration(ObjectProperty(:inContext))
 
-FunctionalObjectProperty(:causes)
 ObjectPropertyDomain(:causes :Action)
 ObjectPropertyRange(:causes :State)
 
-
-SubObjectPropertyOf(:forReasons :causes)
 FunctionalObjectProperty(:forReasons)
 
-
-FunctionalObjectProperty(:inContext)
 ObjectPropertyDomain(:inContext :Action)
 ObjectPropertyRange(:inContext :State)
 

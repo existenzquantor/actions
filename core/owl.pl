@@ -1,4 +1,4 @@
--module(actions_owl, [prepare_owl/2]).
+:-module(actions_owl, [prepare_owl/2]).
 :- use_module("core.pl", [names/2, contexts/4, causedFacts/3, causedFacts/1, reasons/3, reasons/2]).
 :- use_module("helpers.pl", [without_last/2]).
 
